@@ -1,0 +1,2179 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=0.8, user-scalable=yes">
+    <title>উইশ কার্ড প্রো - ভার্সন ৬.৫ (ফিক্সড)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ফন্ট লোড -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Atma:wght@400;500;600;700&family=Mina:wght@400;700&family=Tiro+Bangla:ital@0;1&family=Galada&family=Kalam:wght@300;400;700&family=Anek+Bangla:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700&family=Mukta:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Playwrite+IN:wght@100;200;300;400&family=Satisfy&family=Great+Vibes&family=Pacifico&family=Eczar:wght@400;500;600;700;800&family=Alkatra:wght@400;500;600;700&family=Khand:wght@300;400;500;600;700&family=Tillana:wght@400;500;600;700;800&family=Yatra+One&family=Rozha+One&family=Laila:wght@300;400;500;600;700&family=Gowun+Batang:wght@400;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Abril+Fatface&family=Lobster&family=Dancing+Script:wght@400;500;600;700&family=Permanent+Marker&family=Shadows+Into+Light&family=Cinzel:wght@400;500;600;700;800;900&family=Courgette&family=Caveat:wght@400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&family=Indie+Flower&family=Sacramento&family=Amatic+SC:wght@400;700&family=Righteous&family=Berkshire+Swash&family=Monoton&family=Bungee+Shade&family=Orbitron:wght@400;700&family=Bangers&family=Special+Elite&family=Fredericka+the+Great&family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS Styling -->
+<style>
+.sharifulinfo-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  animation: sharifulinfo-fadeIn 0.4s ease;
+  overflow-y: auto;
+  padding: 20px 10px;
+  box-sizing: border-box;
+}
+
+.sharifulinfo-modal-content {
+  position: relative;
+  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+  margin: auto;
+  border-radius: 25px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 420px;
+  animation: sharifulinfo-slideIn 0.5s ease;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sharifulinfo-modal-inner {
+  padding: 30px 25px;
+  position: relative;
+}
+
+.sharifulinfo-modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+  z-index: 1;
+}
+
+.sharifulinfo-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sharifulinfo-close:hover {
+  transform: scale(1.1) rotate(90deg);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fdbb2d;
+}
+
+.sharifulinfo-header {
+  margin-bottom: 30px;
+}
+
+.sharifulinfo-image-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 25px;
+}
+
+.sharifulinfo-image {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.sharifulinfo-image:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.sharifulinfo-image-overlay {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+  z-index: 1;
+  opacity: 0.5;
+  animation: sharifulinfo-rotate 10s linear infinite;
+}
+
+.sharifulinfo-name {
+  font-size: 26px;
+  margin: 15px 0 10px;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.sharifulinfo-department {
+  font-size: 18px;
+  margin: 12px 0;
+  font-weight: 600;
+  color: #fdbb2d;
+  letter-spacing: 1px;
+}
+
+.sharifulinfo-session {
+  font-size: 16px;
+  margin: 10px 0;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.sharifulinfo-profession-container {
+  margin: 20px 0;
+}
+
+.sharifulinfo-profession {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  display: inline-block;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sharifulinfo-social {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.sharifulinfo-social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sharifulinfo-social-link:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.sharifulinfo-social-link:nth-child(1):hover {
+  background: linear-gradient(135deg, rgba(59, 89, 152, 0.8), rgba(59, 89, 152, 0.9));
+}
+
+.sharifulinfo-social-link:nth-child(2):hover {
+  background: linear-gradient(135deg, rgba(0, 132, 255, 0.8), rgba(0, 132, 255, 0.9));
+}
+
+.sharifulinfo-social-link:nth-child(3):hover {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.8), rgba(37, 211, 102, 0.9));
+}
+
+.sharifulinfo-social-link:nth-child(4):hover {
+  background: linear-gradient(135deg, rgba(212, 70, 56, 0.8), rgba(212, 70, 56, 0.9));
+}
+
+.sharifulinfo-social-link i {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.sharifulinfo-social-link span {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* Animations */
+@keyframes sharifulinfo-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sharifulinfo-slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sharifulinfo-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 480px) {
+  .sharifulinfo-modal {
+    padding: 10px 5px;
+  }
+  
+  .sharifulinfo-modal-content {
+    max-width: 95%;
+    border-radius: 20px;
+  }
+  
+  .sharifulinfo-modal-inner {
+    padding: 25px 20px;
+  }
+  
+  .sharifulinfo-image {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .sharifulinfo-name {
+    font-size: 22px;
+  }
+  
+  .sharifulinfo-department {
+    font-size: 16px;
+  }
+  
+  .sharifulinfo-session, 
+  .sharifulinfo-profession {
+    font-size: 14px;
+  }
+  
+  .sharifulinfo-social {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .sharifulinfo-social-link {
+    padding: 12px 8px;
+  }
+  
+  .sharifulinfo-social-link i {
+    font-size: 22px;
+  }
+  
+  .sharifulinfo-social-link span {
+    font-size: 11px;
+  }
+  
+  .sharifulinfo-close {
+    top: 10px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    font-size: 26px;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 350px) {
+  .sharifulinfo-modal-inner {
+    padding: 20px 15px;
+  }
+  
+  .sharifulinfo-image {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .sharifulinfo-name {
+    font-size: 20px;
+  }
+  
+  .sharifulinfo-social {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Hind Siliguri', sans-serif; background: #f0f2f5; min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+        .wishcard-modal { display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f8fafc; z-index: 1; }
+        .wishcard-modal-content { background: #f8fafc; width: 100%; height: 100%; display: flex; flex-direction: column; }
+
+        .wishcard-modal-header {
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;
+            position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 70px; flex-shrink: 0;
+        }
+
+        .wishcard-modal-title { font-size: 24px; font-weight: 700; font-family: 'Baloo Da 2', cursive; display: flex; align-items: center; gap: 12px; }
+        .wishcard-random-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+        .wishcard-random-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+        .wishcard-modal-body { display: flex; flex-direction: row; height: calc(100vh - 70px - 70px); overflow: hidden; } 
+
+        .wishcard-preview-container {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); padding: 40px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative; width: 60%; height: 100%; overflow-y: auto;
+        }
+
+        .preview-controls {
+            position: absolute; top: 20px; left: 20px; display: flex; gap: 10px; z-index: 50;
+        }
+        .preview-label, .undo-redo-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+            padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: 600;
+            display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: none; cursor: pointer; transition: transform 0.2s;
+        }
+        .undo-redo-btn:active { transform: scale(0.95); }
+        .undo-redo-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* কার্ড স্টাইল */
+        .wishcard-card {
+            width: 100%; max-width: 500px; min-height: 450px;
+            border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; position: relative; overflow: hidden; transition: all 0.3s ease;
+            border: 0px solid transparent; 
+        }
+
+        .wishcard-card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; transition: filter 0.3s; }
+        
+        .wishcard-texture-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
+            pointer-events: none; opacity: 0.3;
+        }
+
+        .wishcard-card-content {
+            position: relative; z-index: 3; width: 85%; padding: 30px;
+            border-radius: 16px; backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15); margin: 20px 0;
+            transition: all 0.3s ease; background-size: cover !important; background-position: center !important;
+            clip-path: none; 
+        }
+
+        .wishcard-card-title { font-size: 36px; font-weight: 800; margin-bottom: 15px; position: relative; padding-bottom: 15px; word-wrap: break-word; text-shadow: none; }
+        .wishcard-card-title:after { content: ''; position: absolute; bottom: 0; left: 30%; width: 40%; height: 3px; border-radius: 2px; background: linear-gradient(to right, transparent, currentColor, transparent); opacity: 0.5; }
+        .wishcard-card-message { font-size: 18px; line-height: 1.6; margin-bottom: 20px; min-height: 80px; display: flex; align-items: center; justify-content: center; padding: 10px; border-radius: 10px; white-space: pre-wrap; }
+        .wishcard-card-footer { font-size: 14px; margin-top: 15px; padding-top: 15px; border-top: 2px dashed rgba(0,0,0,0.1); }
+        .wishcard-heart-icon { color: #ff4757; animation: heartbeat 1.5s infinite; display: inline-block; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.2); } 50% { transform: scale(1); } 75% { transform: scale(1.1); } }
+
+        /* Movable Elements */
+        .movable-element {
+            position: absolute; z-index: 20; cursor: move; touch-action: none;
+            transition: transform 0.1s; user-select: none;
+        }
+        .movable-element:active { cursor: grabbing; opacity: 0.8; }
+        .movable-element.selected { border: 2px dashed #ff4757; }
+
+        .qr-code-container {
+            bottom: 20px; left: 20px; 
+            background: white; padding: 5px; border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: none;
+        }
+        .qr-code-container img { width: 100%; height: 100%; display: block; }
+
+        .date-badge {
+            top: 20px; right: 20px;
+            background: rgba(255,255,255,0.9); color: #333; padding: 5px 15px;
+            border-radius: 8px; font-size: 14px; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); text-align: center;
+            display: none; border-left: 4px solid #ff4757;
+            min-width: 80px;
+        }
+
+        /* Draggable Decorations */
+        .draggable-decoration { position: absolute; z-index: 10; cursor: grab; font-size: 40px; user-select: none; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); transition: transform 0.1s; touch-action: none; }
+        .draggable-decoration:active { cursor: grabbing; }
+        .draggable-decoration.selected { outline: 2px dashed #667eea; border-radius: 5px; }
+
+        .draggable-image { position: absolute; z-index: 9; cursor: grab; max-width: 150px; user-select: none; border: 2px dashed transparent; touch-action: none; }
+        .draggable-image.selected { border-color: #ff4757; background: rgba(255, 71, 87, 0.1); }
+        .draggable-image img { width: 100%; height: auto; display: block; pointer-events: none; }
+        
+        /* Layer Control classes */
+        .z-front { z-index: 50 !important; }
+        .z-back { z-index: 2 !important; }
+
+        /* Actions */
+        .wishcard-action-buttons { display: flex; gap: 15px; margin-top: 30px; width: 100%; max-width: 500px; }
+        .wishcard-action-btn { flex: 1; padding: 16px 20px; border: none; border-radius: 15px; font-size: 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; font-family: 'Hind Siliguri', sans-serif; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .wishcard-download-btn { background: linear-gradient(135deg, #00b09b, #96c93d); color: white; }
+        .wishcard-share-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .wishcard-action-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.25); }
+
+        /* Sidebar & Controls */
+        .wishcard-sidebar { background: white; padding: 25px; width: 40%; overflow-y: auto; max-height: 100%; border-right: 1px solid #e2e8f0; }
+        .wishcard-control-group { margin-bottom: 20px; background: #f8fafc; padding: 18px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .wishcard-control-label { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-weight: 700; color: #334155; font-size: 15px; }
+        .wishcard-control-label i { color: #667eea; background: rgba(102, 126, 234, 0.1); width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+        .wishcard-text-input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-family: 'Hind Siliguri', sans-serif; background: white; }
+        .wishcard-text-input:focus { outline: none; border-color: #667eea; }
+        textarea.wishcard-text-input { height: 100px; resize: vertical; }
+
+        .tool-row { display: flex; gap: 15px; margin-top: 10px; align-items: center; }
+        .size-slider-container { flex: 1; }
+        .size-slider { width: 100%; height: 6px; background: #cbd5e1; border-radius: 5px; appearance: none; outline: none; }
+        .size-slider::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #667eea; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+        .align-btn-group { display: flex; background: white; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+        .align-btn { padding: 8px 12px; border: none; background: transparent; cursor: pointer; font-size: 14px; color: #64748b; transition: all 0.2s; }
+        .align-btn.active { background: #667eea; color: white; }
+
+        .file-upload-wrapper { position: relative; width: 100%; height: 50px; border: 2px dashed #667eea; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: rgba(102, 126, 234, 0.05); transition: all 0.3s; margin-bottom: 5px; }
+        .file-upload-wrapper:hover { background: rgba(102, 126, 234, 0.1); }
+        .file-upload-wrapper input[type="file"] { position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+        
+        .remove-btn { width: 100%; padding: 8px; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; margin-bottom: 10px; display: none; }
+
+        /* Grids */
+        .wishcard-style-options, .wishcard-msgbox-options, .wishcard-decoration-options, .wishcard-frame-options, .wishcard-shape-options, .wishcard-texture-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 10px; }
+        .wishcard-style-btn, .wishcard-frame-btn, .wishcard-shape-btn, .wishcard-texture-btn { padding: 8px 5px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70px; }
+        .wishcard-color-options { display: flex; flex-wrap: wrap; gap: 8px; }
+        .wishcard-font-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+
+        .wishcard-style-btn.active, .wishcard-msgbox-btn.active, .wishcard-template-btn.active, .wishcard-frame-btn.active, .wishcard-shape-btn.active, .wishcard-texture-btn.active { border-color: #667eea; background: rgba(102, 126, 234, 0.05); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2); }
+        .wishcard-style-name, .wishcard-msgbox-name, .wishcard-frame-name, .wishcard-shape-name, .wishcard-texture-name { font-size: 10px; font-weight: 700; color: #64748b; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+
+        .wishcard-msgbox-btn { padding: 8px 5px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; }
+        .wishcard-msgbox-preview { width: 100%; height: 35px; border-radius: 6px; margin-bottom: 5px; }
+
+        .color-picker-wrapper { position: relative; width: 35px; height: 35px; overflow: hidden; border-radius: 8px; border: 2px solid #e2e8f0; cursor: pointer; }
+        .color-picker-wrapper input[type="color"] { position: absolute; width: 150%; height: 150%; top: -25%; left: -25%; cursor: pointer; border: none; }
+        .wishcard-color-btn { width: 35px; height: 35px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: transform 0.2s; flex-shrink: 0; }
+        .wishcard-color-btn:hover, .wishcard-color-btn.active { transform: scale(1.15); border-color: white; box-shadow: 0 0 0 2px #667eea; }
+
+        .wishcard-font-btn { padding: 12px 10px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .wishcard-font-btn.active { border-color: #667eea; background: rgba(102, 126, 234, 0.05); }
+
+        .wishcard-template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+        .wishcard-template-btn { padding: 10px; border: 1px solid #cbd5e1; border-radius: 10px; background: white; cursor: pointer; font-size: 13px; font-weight: 600; text-align: center; transition: all 0.2s; }
+        .wishcard-template-btn:hover { background: #f1f5f9; }
+
+        .decoration-item { font-size: 24px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; cursor: pointer; text-align: center; transition: transform 0.2s; }
+        .decoration-item:hover { transform: scale(1.1); background: #f8fafc; }
+
+        .wishcard-loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; display: none; justify-content: center; align-items: center; flex-direction: column; color: white; }
+        .wishcard-loading-spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .wishcard-share-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; overflow-y: auto; padding: 20px; }
+        .wishcard-share-modal-content { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 30px; margin: 80px auto; text-align: center; }
+        .wishcard-share-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 25px 0; }
+        .wishcard-share-option { display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; padding: 15px; border-radius: 15px; transition: background 0.3s; }
+        .wishcard-share-option:hover { background: #f1f5f9; }
+        .wishcard-share-icon { width: 50px; height: 50px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; }
+        
+        .wishcard-facebook-bg { background: #3b5998; }
+        .wishcard-whatsapp-bg { background: #25D366; }
+        .wishcard-native-bg { background: #00b09b; }
+
+        .section-toggle { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 5px 0; }
+        .section-content { max-height: 2000px; overflow: visible; transition: max-height 0.3s; margin-top: 15px; }
+        .section-content.collapsed { max-height: 0; overflow: hidden; margin-top: 0; }
+        .section-toggle.collapsed i.toggle-icon { transform: rotate(-90deg); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* AI 2.0 & Voice */
+        .ai-tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .ai-input { padding: 8px; border-radius: 8px; border: 1px solid #cbd5e1; width: 100%; font-size: 13px; font-family: 'Hind Siliguri', sans-serif; }
+        .mood-select { padding: 8px; border-radius: 8px; border: 1px solid #cbd5e1; background: white; width: 100%; font-size: 13px; font-family: 'Hind Siliguri', sans-serif; }
+        .ai-btn { background: #667eea; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; width: 100%; display: flex; justify-content: center; align-items: center; gap: 5px; }
+        .mic-btn { background: #ff4757; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+        .mic-btn.listening { animation: pulse 1.5s infinite; background: #dc2626; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        
+        /* New Stylish Footer */
+        .page-footer {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 15px;
+            font-weight: 500;
+            margin-top: auto;
+            border-top: 4px solid #667eea;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        .footer-content {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+        }
+        .page-footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .page-footer a:hover {
+            color: #fff;
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        .developer-badge {
+            background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        /* Element Selection UI */
+        .element-controls {
+            display: none; /* Hidden by default */
+            margin-top: 15px;
+            padding: 10px;
+            background: #fff;
+            border: 2px solid #ff4757;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.1);
+        }
+        .element-controls.active { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .control-btn-sm {
+            padding: 5px 10px; background: #ef4444; color: white; border:none; border-radius: 5px; cursor: pointer; font-size: 12px; transition: background 0.2s;
+        }
+        .control-btn-blue { background: #3b82f6; } .control-btn-blue:hover { background: #2563eb; }
+        .control-btn-dark { background: #475569; } .control-btn-dark:hover { background: #334155; }
+        .layer-controls { display: flex; gap: 5px; margin-top: 5px; }
+        .layer-btn { flex: 1; font-size: 11px; padding: 6px; }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="wishcard-loading" id="wishcardLoading">
+        <div class="wishcard-loading-spinner"></div>
+        <p>প্রসেসিং...</p>
+    </div>
+    
+<!-- HTML for the popup -->
+<div class="sharifulinfo-modal" id="sharifulinfoModal">
+  <div class="sharifulinfo-modal-content">
+    <div class="sharifulinfo-modal-inner">
+      <span class="sharifulinfo-close">&times;</span>
+      
+      <div class="sharifulinfo-header">
+        <div class="sharifulinfo-image-container">
+          <img src="https://i.imgur.com/mm2jLrd.png" alt="MD SHARIFUL ISLAM" class="sharifulinfo-image">
+          <div class="sharifulinfo-image-overlay"></div>
+        </div>
+        <h2 class="sharifulinfo-name">MD SHARIFUL ISLAM</h2>
+        <p class="sharifulinfo-department">DEPARTMENT OF PHYSICS</p>
+        <p class="sharifulinfo-session">SESSION: 24-25</p>
+        <div class="sharifulinfo-profession-container">
+          <p class="sharifulinfo-profession">Professional Web Designer & Developer</p>
+        </div>
+      </div>
+      
+      <div class="sharifulinfo-social">
+        <a href="https://www.facebook.com/share/1G1KQHWXH9/" target="_blank" class="sharifulinfo-social-link">
+          <i class="fab fa-facebook-f"></i>
+          <span>Facebook</span>
+        </a>
+        <a href="https://m.me/msharifulvisionary" target="_blank" class="sharifulinfo-social-link">
+          <i class="fab fa-facebook-messenger"></i>
+          <span>Messenger</span>
+        </a>
+        <a href="https://wa.me/8801735757143" target="_blank" class="sharifulinfo-social-link">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="mailto:msharifulvisionary@gmail.com" class="sharifulinfo-social-link">
+          <i class="fas fa-envelope"></i>
+          <span>Email</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div id="wishcardModal" class="wishcard-modal">
+        <div class="wishcard-modal-content">
+            <div class="wishcard-modal-header">
+                <h2 class="wishcard-modal-title">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    উইশ কার্ড প্রো 
+                </h2>
+                <button class="wishcard-random-btn" onclick="wishcardRandomize()">
+                    <i class="fas fa-dice"></i>
+                    ম্যাজিক শাফেল
+                </button>
+            </div>
+            
+            <div class="wishcard-modal-body">
+                <!-- কন্ট্রোল সাইডবার -->
+                <div class="wishcard-sidebar">
+                    
+                    <!-- সিলেকশন কন্ট্রোল প্যানেল -->
+                    <div id="stickerControls" class="element-controls">
+                        <label class="wishcard-control-label" style="font-size:13px; color:#ff4757;">
+                            <i class="fas fa-hand-pointer" style="background:rgba(255,71,87,0.1); color:#ff4757;"></i> সিলেক্টেড আইটেম কন্ট্রোল
+                        </label>
+                        
+                        <div class="tool-row">
+                             <div class="size-slider-container">
+                                <span style="font-size: 12px; color: #64748b;">সাইজ</span>
+                                <input type="range" class="size-slider" id="stickerSizeSlider" min="0.5" max="3" step="0.1" value="1" oninput="resizeSelectedElement(this.value)">
+                            </div>
+                        </div>
+
+                        <!-- Opacity Slider -->
+                        <div class="tool-row">
+                            <div class="size-slider-container">
+                               <span style="font-size: 12px; color: #64748b;">স্বচ্ছতা (Opacity)</span>
+                               <input type="range" class="size-slider" id="stickerOpacitySlider" min="0" max="1" step="0.1" value="1" oninput="changeSelectedOpacity(this.value)">
+                           </div>
+                       </div>
+
+                       <!-- Layer Controls -->
+                        <div class="layer-controls">
+                            <button class="control-btn-sm control-btn-dark layer-btn" onclick="changeSelectedLayer('back')" title="লেখার নিচে পাঠান">
+                                <i class="fas fa-layer-group"></i> পিছনে পাঠান
+                            </button>
+                            <button class="control-btn-sm control-btn-blue layer-btn" onclick="changeSelectedLayer('front')" title="সবার উপরে আনুন">
+                                <i class="fas fa-arrow-up"></i> সামনে আনুন
+                            </button>
+                        </div>
+
+                        <button class="control-btn-sm" onclick="deleteSelectedElement()" style="width:100%; margin-top:8px;">
+                            <i class="fas fa-trash"></i> ডিলিট করুন
+                        </button>
+                    </div>
+
+                    <!-- কুইক টেমপ্লেট -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer; color: #764ba2;">
+                                <i class="fas fa-bolt"></i> কুইক টেমপ্লেট
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-template-grid" id="templateOptionsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- হেডিং -->
+                    <div class="wishcard-control-group">
+                        <label class="wishcard-control-label">
+                            <i class="fas fa-heading"></i>
+                            হেডিং ও স্টাইল
+                        </label>
+                        <input type="text" class="wishcard-text-input" id="wishcardHeading" value="শুভ জন্মদিন!" onchange="saveState()">
+                        
+                        <div class="tool-row">
+                            <div class="size-slider-container">
+                                <span style="font-size: 12px; color: #64748b;">হেডিং সাইজ</span>
+                                <input type="range" class="size-slider" id="headingSize" min="20" max="80" value="36" oninput="wishcardUpdateCard()" onchange="saveState()">
+                            </div>
+                            <div class="align-btn-group">
+                                <button class="align-btn" onclick="setAlignment('left')"><i class="fas fa-align-left"></i></button>
+                                <button class="align-btn active" onclick="setAlignment('center')"><i class="fas fa-align-center"></i></button>
+                                <button class="align-btn" onclick="setAlignment('right')"><i class="fas fa-align-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI মেসেজ সিস্টেম ২.০ -->
+                    <div class="wishcard-control-group">
+                        <label class="wishcard-control-label">
+                            <i class="fas fa-robot"></i> AI স্মার্ট মেসেজ 
+                        </label>
+                        
+                        <div class="ai-tools-grid">
+                            <input type="text" id="aiName" class="ai-input" placeholder="প্রাপকের নাম (যেমন: রাজু)">
+                            <select id="aiRelation" class="mood-select">
+                                <option value="friend">বন্ধু</option>
+                                <option value="love">ভালোবাসার মানুষ</option>
+                                <option value="family">পরিবার</option>
+                                <option value="brother">ভাই</option>
+                                <option value="sister">বোন</option>
+                                <option value="boss">বস/স্যার</option>
+                                <option value="teacher">শিক্ষক</option>
+                                <option value="colleague">সহকর্মী</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom:10px;">
+                            <select id="moodSelector" class="mood-select">
+                                <option value="normal">সাধারণ মুড</option>
+                                <option value="emotional">আবেগপ্রবণ</option>
+                                <option value="funny">মজার</option>
+                                <option value="poetic">কাব্যিক</option>
+                                <option value="inspirational">অনুপ্রেরণামূলক</option>
+                                <option value="sarcastic">রসিকতা (Sarcastic)</option>
+                            </select>
+                        </div>
+                        <button class="ai-btn" onclick="generateSmartQuote()">
+                            <i class="fas fa-magic"></i> জেনারেট করুন
+                        </button>
+
+                        <div style="position: relative; margin-top: 15px;">
+                            <textarea class="wishcard-text-input" id="wishcardMessage" onchange="saveState()">প্রিয়, জন্মদিনের অনেক অনেক শুভেচ্ছা! তোমার জীবন সুখে-সমৃদ্ধিতে ভরে উঠুক।</textarea>
+                            <button class="mic-btn" id="micBtn" onclick="toggleVoiceInput()" style="position: absolute; bottom: 10px; right: 10px;" title="ভয়েস টাইপিং">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="tool-row">
+                            <div class="size-slider-container">
+                                <span style="font-size: 12px; color: #64748b;">বার্তা সাইজ</span>
+                                <input type="range" class="size-slider" id="messageSize" min="12" max="40" value="18" oninput="wishcardUpdateCard()" onchange="saveState()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- টেক্সট ইফেক্ট -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-fill-drip"></i> টেক্সট ইফেক্ট
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="tool-row">
+                                <div class="size-slider-container">
+                                    <span style="font-size: 12px; color: #64748b;">লেখা গাঢ় করুন (Stroke)</span>
+                                    <input type="range" class="size-slider" id="textStroke" min="0" max="5" value="0" step="0.5" oninput="wishcardUpdateCard()" onchange="saveState()">
+                                </div>
+                            </div>
+                            <div class="tool-row">
+                                <div class="size-slider-container">
+                                    <span style="font-size: 12px; color: #64748b;">ছায়া দিন (Shadow)</span>
+                                    <input type="range" class="size-slider" id="textShadow" min="0" max="10" value="0" oninput="wishcardUpdateCard()" onchange="saveState()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ফুটার -->
+                    <div class="wishcard-control-group">
+                        <label class="wishcard-control-label">
+                            <i class="fas fa-signature"></i>
+                            ফুটার / স্বাক্ষর
+                        </label>
+                        <input type="text" class="wishcard-text-input" id="wishcardFooter" value="চিরকাল ভালোবাসা সহ" onchange="saveState()">
+                        
+                        <div class="tool-row">
+                            <div class="size-slider-container">
+                                <span style="font-size: 12px; color: #64748b;">ফুটার সাইজ</span>
+                                <input type="range" class="size-slider" id="footerSize" min="10" max="30" value="14" oninput="wishcardUpdateCard()" onchange="saveState()">
+                            </div>
+                        </div>
+                        
+                        <!-- ডেট ব্যাজ টগল ও কাস্টম ডেট -->
+                         <div style="margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
+                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                                <input type="checkbox" id="showDate" onchange="wishcardUpdateCard()">
+                                <span style="font-size:14px; font-weight:600; color:#334155;">কার্ডে তারিখ দেখান</span>
+                            </div>
+                            <input type="text" class="wishcard-text-input" id="customDateInput" placeholder="তারিখ লিখুন (যেমন: ১লা জানুয়ারি)" oninput="updateDateText()" style="padding:8px; font-size:13px;">
+                             
+                             <div style="margin-top:5px; display:flex; gap:10px; align-items:center;">
+                                <span style="font-size:12px; color:#64748b;">সাইজ:</span>
+                                 <input type="range" class="size-slider" id="dateSize" min="0.5" max="1.5" step="0.1" value="1" oninput="resizeElement('dateBadge', this.value)" title="তারিখের সাইজ">
+                             </div>
+                        </div>
+                        <p style="font-size:10px; color:#64748b; margin-top:5px;">* মোবাইল বা পিসিতে তারিখটি টেনে যেকোনো জায়গায় বসানো যাবে।</p>
+                    </div>
+
+                    <!-- QR কোড -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-qrcode"></i> QR কোড যুক্ত করুন
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content collapsed">
+                            <input type="text" class="wishcard-text-input" id="qrText" placeholder="গোপন বার্তা বা লিংক দিন...">
+                            <div class="tool-row">
+                                <span style="font-size:12px; color:#64748b;">QR সাইজ:</span>
+                                <input type="range" class="size-slider" min="50" max="150" value="80" oninput="resizeQR(this.value)">
+                            </div>
+                            <button onclick="generateQR()" style="margin-top:10px; width:100%; padding:10px; background:#667eea; color:white; border:none; border-radius:8px; cursor:pointer;">
+                                QR কোড তৈরি করুন
+                            </button>
+                            <button onclick="removeQR()" style="margin-top:5px; width:100%; padding:8px; background:#ff4757; color:white; border:none; border-radius:8px; cursor:pointer; font-size:12px;">
+                                মুছুন
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ব্যাকগ্রাউন্ড ও ইফেক্ট -->
+                    <div class="wishcard-control-group">
+                        <label class="wishcard-control-label">
+                            <i class="fas fa-image"></i>
+                            ব্যাকগ্রাউন্ড ও ইফেক্ট
+                        </label>
+                        <div class="file-upload-wrapper">
+                            <span style="font-size: 14px; color: #667eea; font-weight: 600;">
+                                <i class="fas fa-cloud-upload-alt"></i> ছবি আপলোড করুন
+                            </span>
+                            <input type="file" id="bgUpload" accept="image/*" onchange="handleBgUpload(this)">
+                        </div>
+                        <button id="removeBgBtn" class="remove-btn" onclick="removeCustomBg()">রিমুভ ব্যাকগ্রাউন্ড ইমেজ</button>
+                        
+                        <div class="tool-row" style="margin-top:10px;">
+                             <div class="size-slider-container">
+                                <span style="font-size: 12px; color: #64748b;">ঝাপসা (Blur)</span>
+                                <input type="range" class="size-slider" id="bgBlur" min="0" max="20" value="0" oninput="wishcardUpdateCard()" onchange="saveState()">
+                            </div>
+                        </div>
+                         <div class="tool-row">
+                             <div class="size-slider-container">
+                                <span style="font-size: 12px; color: #64748b;">উজ্জ্বলতা (Brightness)</span>
+                                <input type="range" class="size-slider" id="bgBrightness" min="50" max="150" value="100" oninput="wishcardUpdateCard()" onchange="saveState()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- টেক্সচার ওভারলে -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-layer-group"></i> টেক্সচার ওভারলে (New)
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-texture-options" id="textureOptionsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- ছবি/স্টিকার ওভারলে -->
+                    <div class="wishcard-control-group">
+                        <label class="wishcard-control-label">
+                            <i class="fas fa-file-image"></i>
+                            ছবি স্টিকার যুক্ত করুন
+                        </label>
+                        <div class="file-upload-wrapper" style="border-style:dashed; border-color:#ff4757; background:rgba(255,71,87,0.05);">
+                            <span style="font-size: 14px; color: #ff4757; font-weight: 600;">
+                                <i class="fas fa-plus"></i> ছবির উপরে ছবি বসান
+                            </span>
+                            <input type="file" id="overlayUpload" accept="image/*" onchange="handleAddOverlay(this)">
+                        </div>
+                        <p style="font-size:11px; color:#64748b; margin-top:5px;">* ছবিতে ক্লিক করে স্বচ্ছতা (Opacity) কমানো এবং পিছনে (Background) পাঠানো যাবে।</p>
+                    </div>
+
+                    <!-- ডেকোরেশন -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-icons"></i> ডেকোরেশন আইকন
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-decoration-options" id="decorationContainer"></div>
+                            <button onclick="clearDecorations()" style="margin-top:10px; width:100%; padding:8px; border:1px solid #ff4757; color:#ff4757; background:white; border-radius:8px; cursor:pointer;">
+                                <i class="fas fa-trash"></i> সব মুছুন
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- বর্ডার ফ্রেম -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-border-all"></i> বর্ডার ফ্রেম
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-frame-options" id="frameOptionsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- ডিজাইন -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-palette"></i> ব্যাকগ্রাউন্ড স্টাইল (৬০টি)
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-style-options" id="styleOptionsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- বার্তা বক্স শেপ -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-shapes"></i> বক্সের আকৃতি
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-shape-options" id="shapeOptionsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- বার্তা বক্স স্টাইল -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-square"></i> বক্স ডিজাইন (৫০টি)
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="file-upload-wrapper" style="margin-bottom: 5px; border-style: dashed; border-color: #cbd5e1;">
+                                <span style="font-size: 12px; color: #64748b; font-weight: 600;">
+                                    <i class="fas fa-upload"></i> কাস্টম বক্স আপলোড
+                                </span>
+                                <input type="file" id="msgBoxUpload" accept="image/*" onchange="handleMsgBoxUpload(this)">
+                            </div>
+                            <button id="removeBoxBtn" class="remove-btn" onclick="removeCustomBox()">রিমুভ বক্স ইমেজ</button>
+                            <div class="wishcard-msgbox-options" id="msgBoxOptionsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- টেক্সট রং -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-droplet"></i> টেক্সট রং
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-color-options" id="colorOptionsContainer">
+                                <div class="color-picker-wrapper" title="কাস্টম কালার">
+                                    <input type="color" id="customColorPicker" oninput="selectCustomColor(this.value)">
+                                    <i class="fas fa-eye-dropper" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; color:#64748b;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ফন্ট -->
+                    <div class="wishcard-control-group">
+                        <div class="section-toggle" onclick="toggleSection(this)">
+                            <label class="wishcard-control-label" style="margin:0;cursor:pointer;">
+                                <i class="fas fa-font"></i> ফন্ট স্টাইল (৩৫টি)
+                            </label>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="section-content">
+                            <div class="wishcard-font-options" id="fontOptionsContainer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- প্রিভিউ -->
+                <div class="wishcard-preview-container">
+                    <div class="preview-controls">
+                         <div class="preview-label"><i class="fas fa-eye"></i> লাইভ প্রিভিউ</div>
+                         <button class="undo-redo-btn" onclick="undo()" title="Undo"><i class="fas fa-undo"></i></button>
+                         <button class="undo-redo-btn" onclick="redo()" title="Redo"><i class="fas fa-redo"></i></button>
+                    </div>
+
+                    <div class="wishcard-card" id="wishcardPreview">
+                        <div class="wishcard-card-bg" id="wishcardBackground"></div>
+                        
+                        <!-- টেক্সচার ওভারলে -->
+                        <div class="wishcard-texture-overlay" id="textureOverlay"></div>
+
+                        <!-- ডেট ব্যাজ (Draggable) -->
+                        <div id="dateBadge" class="date-badge movable-element"></div>
+
+                        <!-- QR Code (Draggable) -->
+                        <div id="qrCodeContainer" class="qr-code-container movable-element"></div>
+
+                        <!-- ডেকোরেশন ও ইমেজ লেয়ার -->
+                        <div id="overlayLayer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
+
+                        <div class="wishcard-card-content" id="wishcardContent">
+                            <h1 class="wishcard-card-title" id="wishcardTitle">শুভ জন্মদিন!</h1>
+                            <p class="wishcard-card-message" id="wishcardMessagePreview">প্রিয়, জন্মদিনের...</p>
+                            <p class="wishcard-card-footer" id="wishcardFooterPreview">চিরকাল ভালোবাসা সহ</p>
+                        </div>
+                    </div>
+
+                    <div class="wishcard-action-buttons">
+                        <button class="wishcard-action-btn wishcard-download-btn" onclick="wishcardDownload()">
+                            <i class="fas fa-download"></i> ডাউনলোড
+                        </button>
+                        <button class="wishcard-action-btn wishcard-share-btn" onclick="wishcardShareImage()">
+                            <i class="fas fa-share-nodes"></i> শেয়ার করুন
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stylish Footer -->
+            <footer class="page-footer">
+                <div class="footer-content">
+                    <div>Design and Develop By <span class="developer-badge"><a href="javascript:void(0);" class="designer-link">MD SHARIFUL ISLAM</a></span></div>
+                    <div style="font-size:12px; opacity:0.8;">© 2025 Wish Card Pro | All Rights Reserved</div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- শেয়ার মোডাল -->
+    <div id="wishcardShareModal" class="wishcard-share-modal">
+        <div class="wishcard-share-modal-content">
+            <h3 style="margin-bottom: 10px;">শেয়ার করুন</h3>
+            <div class="wishcard-share-options">
+                <div class="wishcard-share-option" onclick="wishcardNativeShare()">
+                    <div class="wishcard-share-icon wishcard-native-bg"><i class="fas fa-share"></i></div>
+                    <span>সরাসরি</span>
+                </div>
+                <div class="wishcard-share-option" onclick="wishcardShareToFacebook()">
+                    <div class="wishcard-share-icon wishcard-facebook-bg"><i class="fab fa-facebook-f"></i></div>
+                    <span>ফেসবুক</span>
+                </div>
+                <div class="wishcard-share-option" onclick="wishcardShareToWhatsApp()">
+                    <div class="wishcard-share-icon wishcard-whatsapp-bg"><i class="fab fa-whatsapp"></i></div>
+                    <span>হোয়াটসঅ্যাপ</span>
+                </div>
+            </div>
+            <button onclick="document.getElementById('wishcardShareModal').style.display='none'" style="width:100%;padding:15px;background:#667eea;color:white;border:none;border-radius:12px;cursor:pointer;">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    
+    <script>
+        // ভ্যারিয়েবল
+        let wishcardCurrentStyle = 'rainbow';
+        let wishcardCurrentColor = '#1e293b';
+        let wishcardCurrentFont = 'baloo';
+        let wishcardCurrentMsgBox = 'glass-white';
+        let wishcardCurrentFrame = 'none'; 
+        let wishcardCurrentShape = 'rectangle';
+        let wishcardCurrentTexture = 'none'; 
+        let activeTemplateKey = 'birthday'; 
+        let customBgImage = null;
+        let customMsgBoxImage = null;
+        let currentAlignment = 'center';
+        let generatedImageData = null;
+        let generatedBlob = null;
+        let recognition = null; 
+        
+        // Undo/Redo Stacks
+        let historyStack = [];
+        let redoStack = [];
+        const MAX_HISTORY = 20;
+
+        // Selected Element
+        let selectedElement = null;
+
+        // Data Arrays (V6.5 Data)
+const quoteDatabase = {
+    'birthday': {
+        'normal': [
+            'শুভ জন্মদিন {name}! দিনটি আনন্দে কাটুক।',
+            '{name}, জন্মদিনের অনেক শুভেচ্ছা।', 
+            'আজকের দিনটি শুধুই তোমার, {name}। শুভ জন্মদিন!',
+            'জন্মদিনের শুভেচ্ছা {name}। জীবন ভরে উঠুক হাসি-আনন্দে।'
+        ],
+        'emotional': [
+            'প্রিয় {name}, তুমি আমার জীবনে আশীর্বাদ। শুভ জন্মদিন!',
+            'বয়স বাড়লেও আমাদের বন্ধুত্ব একই থাকবে। শুভ জন্মদিন {name}।',
+            'তোমার মতো মানুষের জন্য পৃথিবী সুন্দর, {name}। শুভ জন্মদিন।',
+            'আজকের দিনে শুধু একটি কথাই বলতে চাই - তোমার জীবনের প্রতিটি মুহূর্ত সুখময় হোক।'
+        ],
+        'funny': [
+            'শুভ জন্মদিন {name}! কেকটা কিন্তু আমিই খাবো।',
+            'বয়স বাড়লেও বুদ্ধি বাড়লো না {name}!',
+            'জন্মদিন মানেই কেকের টুকরো, উপহার আর ভাইরাল ফেসবুক পোস্ট! শুভ জন্মদিন {name}!',
+            'এবারের জন্মদিনে বুদ্ধির গিফট চাইলে বলো, {name}!'
+        ],
+        'poetic': [
+            'সূর্যের হাসি, {name}-এর জীবনে আনুক সুখের রাশি।',
+            'প্রতিটি জন্মদিন একটি নতুন পাতার মতো, {name}। তোমার জীবনের বইটি সোনালি হোক।',
+            'ফুলের গন্ধের মত ছড়িয়ে পড়ুক তোমার হাসি, প্রিয় {name}। শুভ জন্মদিন।',
+            'জীবনের বইয়ে আজ নতুন পাতা, লিখো সুখের গল্প {name}।'
+        ],
+        'inspirational': [
+            '{name}, নতুন বয়সে নতুন উদ্যমে এগিয়ে যাও। শুভ জন্মদিন।',
+            'জন্মদিন শুধু বয়সের হিসাব নয়, নতুন স্বপ্ন দেখার দিন। শুভ জন্মদিন {name}।',
+            'তোমার প্রতিভা আরও উজ্জ্বল হোক, {name}। জন্মদিনের শুভকামনা।',
+            'এগিয়ে যাও, পৌঁছে যাও লক্ষ্যে, তোমার জন্য শুভকামনা {name}।'
+        ],
+        'sarcastic': [
+            'অভিনন্দন {name}, মৃত্যুর দিকে আরও এক বছর এগিয়ে গেলে!',
+            'বয়স বাড়ছে, কিন্তু পরিপক্বতা আসছে কবে {name}? শুভ জন্মদিন!',
+            'আরেক বছর অতিবাহিত, আরেক বছর কেক খাওয়ার লাইসেন্স পেলে!',
+            'জন্মদিনে সবাই ভালোবাসা দেখাবে, আগামীকাল আবার ভুলে যাবে!'
+        ],
+        'romantic': [
+            'আমার আকাশের সবচেয়ে উজ্জ্বল তারা তুমি, {name}। শুভ জন্মদিন প্রিয়।',
+            'তোমার জন্মদিনে বলছি, তুমি ছাড়া আমার জীবন অসম্পূর্ণ।',
+            'প্রতিটি জন্মদিনে চাই তোমার পাশে থাকতে, আজীবন। শুভ জন্মদিন {name}।'
+        ]
+    },
+    
+    'anniversary': {
+        'normal': [
+            'শুভ বিবাহ বার্ষিকী {name}!',
+            'ভালোবাসা অবিরাম।',
+            'বার্ষিকীর শুভেচ্ছা {name}। সম্পর্ক যেন আরও মজবুত হয়।'
+        ],
+        'emotional': [
+            '{name}, তোমাদের ভালোবাসা যেন চিরকাল অটুট থাকে।',
+            'একসাথে কাটানো প্রতিটি বছরই সুখের স্মৃতি, শুভ বার্ষিকী {name}।',
+            'ভালোবাসার এই যাত্রা যেন অনন্ত হয়, শুভেচ্ছা {name}।'
+        ],
+        'funny': [
+            'সহ্য করার আরও এক বছর পার হলো! অভিনন্দন {name}।',
+            'এখনো একসাথে আছো? অসাধারণ! শুভ বার্ষিকী {name}!',
+            'বছরের পর বছর পার করছ, এখনো ঝগড়া শেষ হয়নি? শুভ বার্ষিকী!'
+        ],
+        'inspirational': [
+            'তোমাদের পথচলা অন্যদের অনুপ্রেরণা যোগাক।',
+            'ভালোবাসা আর শ্রদ্ধায় বেঁধে রাখা সম্পর্কের উদাহরণ তোমরা। শুভ বার্ষিকী।',
+            'সম্পর্কের এই সুন্দর যাত্রা যেন আরও বহুদূর এগিয়ে যায়।'
+        ],
+        'romantic': [
+            'প্রতিটি বছর আমাদের ভালোবাসাকে আরও গাঢ় করেছে। শুভ বার্ষিকী প্রিয় {name}।',
+            'তোমার সাথে কাটানো প্রতিটি মুহূর্তই আমার জন্য সম্পদ। শুভ বার্ষিকী।',
+            'ভালোবাসার বইয়ে আরেকটি সুন্দর অধ্যায় যুক্ত হলো। শুভ বার্ষিকী {name}।'
+        ]
+    },
+    
+    'new_year': {
+        'normal': [
+            'নতুন বছরের শুভেচ্ছা {name}!',
+            'শুভ নববর্ষ {name}। নতুন বছর সুখময় হোক।',
+            'নতুন বছর নতুন স্বপ্ন নিয়ে আসুক, শুভ কামনা {name}।'
+        ],
+        'inspirational': [
+            'নতুন বছরে নতুন লক্ষ্য নিয়ে এগিয়ে যাও, শুভেচ্ছা {name}।',
+            'গত বছরের ভুলগুলো ভুলে নতুনভাবে শুরু করো। শুভ নববর্ষ।',
+            'নতুন পাতার মতো নতুন বছর, লিখো সফলতার গল্প {name}।'
+        ],
+        'poetic': [
+            'পুরনো দিনের স্মৃতি, নতুন দিনের আশা - শুভ নববর্ষ {name}।',
+            'নতুন সূর্যের আলোয় ভরে যাক তোমার জীবন। শুভ নববর্ষ।'
+        ]
+    },
+    
+    'achievement': {
+        'normal': [
+            'অভিনন্দন {name}! সাফল্যের জন্য শুভেচ্ছা।',
+            'তোমার সাফল্যে আমরা গর্বিত, {name}।'
+        ],
+        'inspirational': [
+            'এটি শুধু শুরু, আরও বড় সাফল্য তোমার জন্য অপেক্ষা করছে {name}।',
+            'তোমার কঠোর পরিশ্রমের ফল পেলে, আরও এগিয়ে যাও।'
+        ],
+        'emotional': [
+            'তোমার এই সাফল্য দেখে চোখে পানি এসেছে {name}। অভিনন্দন।',
+            'তোমার স্বপ্নপূরণে আমরা সবাই খুশি। অনেক অনেক অভিনন্দন।'
+        ]
+    },
+    
+    'get_well': {
+        'normal': [
+            'শীঘ্রই সুস্থ হও {name}। আমাদের দোয়া তোমার সাথে।',
+            'তোমার সুস্থতা কামনা করছি {name}।'
+        ],
+        'emotional': [
+            'তোমার অসুস্থতা আমাদের কষ্ট দেয় {name}। দ্রুত সুস্থ হও।',
+            'তোমার সুস্থতাই আমাদের কামনা, প্রিয় {name}।'
+        ],
+        'inspirational': [
+            'দুর্বলতা সাময়িক, তুমি আবার সুস্থ হয়ে উঠবে {name}। আমরা তোমার সাথে আছি।',
+            'মানসিক শক্তি বজায় রাখো, শারীরিক সুস্থতা আসবেই।'
+        ]
+    },
+    
+    'thank_you': {
+        'normal': [
+            'আপনাকে অনেক ধন্যবাদ {name}।',
+            'কৃতজ্ঞতা জানাই {name}। আপনার সহযোগিতার জন্য শুভকামনা।'
+        ],
+        'emotional': [
+            'আপনার অবদান আমি কখনো ভুলবো না {name}। অসংখ্য ধন্যবাদ।',
+            'হৃদয় থেকে ধন্যবাদ জানাই {name}। আপনি সত্যিই বিশেষ একজন।'
+        ],
+        'poetic': [
+            'কৃতজ্ঞতার ফুলঝুরি ছুটে আসুক আপনার জীবনে, প্রিয় {name}।'
+        ]
+    },
+    
+    'love': {
+        'normal': [
+            'তোমাকে ভালোবাসি {name}।',
+            'তুমি আমার সব।',
+            'তোমার জন্য আমার ভালোবাসা অফুরান {name}।'
+        ],
+        'emotional': [
+            '{name}, তোমাকে ছাড়া আমি অসম্পূর্ণ।',
+            'তোমার প্রতিটি ছোটোখাটো বিষয়ই আমার কাছে বড় {name}।',
+            'তুমি শুধু একটি নাম নয়, আমার অনুভূতির সমষ্টি {name}।'
+        ],
+        'poetic': [
+            'তুমি আমার আকাশ, আমি তোমার তারা।',
+            'ভালোবাসার ভাষা যেন বুঝতে পারে সবাই, যখন দেখি তোমায় {name}।',
+            'তোমার মাঝেই পেয়েছি জীবনের অর্থ, প্রিয়তম {name}।'
+        ],
+        'romantic': [
+            'প্রতিটি শ্বাসে তুমি, প্রতিটি স্বপ্নে তুমি - শুধু তুমিই {name}।',
+            'তোমার হাসিতে হারিয়ে যাই, তোমার চোখে ভেসে যাই। তোমাকে ভালোবাসি {name}।'
+        ]
+    },
+    
+    'boss': {
+        'normal': [
+            'শুভ জন্মদিন স্যার।',
+            'শুভকামনা রইল বস।',
+            'আপনার মঙ্গল কামনা করি স্যার।'
+        ],
+        'inspirational': [
+            'আপনার নেতৃত্বে কাজ করতে পেরে আমরা গর্বিত।',
+            'আপনার দিকনির্দেশনা আমাদের পথ দেখায়।',
+            'একজন আদর্শ নেতা হিসেবে আপনি আমাদের জন্য অনুপ্রেরণা।'
+        ],
+        'respectful': [
+            'আপনার জ্ঞান ও দক্ষতা আমাদের শিখতে সহায়তা করে। ধন্যবাদ স্যার।',
+            'আপনার সহযোগিতা ও পরামর্শের জন্য কৃতজ্ঞ।'
+        ]
+    },
+    
+    'teacher': {
+        'normal': [
+            'শুভ জন্মদিন স্যার/ম্যাম।',
+            'আপনার সুস্বাস্থ্য কামনা করি।',
+            'গুরুজনের প্রতি শ্রদ্ধা জানাই।'
+        ],
+        'emotional': [
+            'শিক্ষক হিসেবে আপনি আমাদের আলোর পথ দেখিয়েছেন।',
+            'আপনার শিক্ষা আজ আমার জীবনের মূলধন।',
+            'গুরুর ঋণ শোধ হওয়ার নয়, শুধু শ্রদ্ধা জানাই।'
+        ],
+        'inspirational': [
+            'জ্ঞান বিতরণকারী হিসেবে আপনি সমাজের মূল স্তম্ভ।',
+            'শিক্ষাই জাতির মেরুদণ্ড, আর আপনিই সেই মেরুদণ্ড শক্তিশালী করেন।'
+        ]
+    },
+    
+    'brother': {
+        'normal': [
+            'শুভ জন্মদিন ভাই!',
+            'ব্রো, হ্যাপি বার্থডে।',
+            'ভাইয়ের জন্মদিনে অনেক শুভেচ্ছা।'
+        ],
+        'funny': [
+            'ভাই, পার্টি কবে দিবি?',
+            'তুই আমার ভাই না হলে তোরে গিফট দিতাম না!',
+            'বড় ভাই মানেই আদরের পাত্র, আজকের দিনে আরও বেশি!'
+        ],
+        'emotional': [
+            'ভাই বলে কেউ থাকে না, তুমি আমার বন্ধুও {name}। শুভ জন্মদিন।',
+            'ঝগড়া করলেও ভাই ভাইই থাকে। তোমার জন্য শুভকামনা।'
+        ]
+    },
+    
+    'sister': {
+        'normal': [
+            'শুভ জন্মদিন বোন!',
+            'আপু, অনেক ভালোবাসা নিস।',
+            'বোনের জন্মদিনে ফুলেল শুভেচ্ছা।'
+        ],
+        'funny': [
+            'শুভ জন্মদিন! মেকআপ ছাড়াও তুই সুন্দর (মিথ্যা বললাম)।',
+            'বোনের জন্মদিন মানেই আমার টাকার মানে অস্তিত্ব সংকট!'
+        ],
+        'emotional': [
+            'বোন মানে পৃথিবীর সবচেয়ে কাছের বন্ধু। শুভ জন্মদিন প্রিয়।',
+            'তুমি আমার প্রথম বন্ধু, আজীবনের সাথী। শুভ জন্মদিন বোন।'
+        ]
+    },
+    
+    'friend': {
+        'normal': [
+            'শুভ জন্মদিন বন্ধু!',
+            'ফ্রেন্ড, হ্যাপি বার্থডে টু ইউ।'
+        ],
+        'funny': [
+            'বন্ধু না হলে তোকে এত সুন্দর মেসেজ দিতাম না!',
+            'জন্মদিনে কি চাস? আমার থেকে দূরে থাকার উপহার?'
+        ],
+        'emotional': [
+            'বন্ধুত্ব আমাদের সম্পর্কের সবচেয়ে সুন্দর নাম। শুভ জন্মদিন প্রিয় বন্ধু।',
+            'তুমি ছাড়া আমার জীবনের অনেক গল্প অসম্পূর্ণ থাকতো। শুভ জন্মদিন।'
+        ]
+    },
+    
+    'child': {
+        'normal': [
+            'শুভ জন্মদিন ফুটফুটে!',
+            'প্রিয় শিশু, জন্মদিনের অনেক শুভেচ্ছা।'
+        ],
+        'poetic': [
+            'ফুলের মতো ফুটে উঠো, শিশু। জন্মদিনের শুভেচ্ছা।',
+            'তোমার হাসিতে ভরে যাক পৃথিবী। শুভ জন্মদিন।'
+        ],
+        'blessing': [
+            'সুস্থ-সবলভাবে বড় হও, ভালো মানুষ হও। জন্মদিনের শুভকামনা।',
+            'ভগবান তোমাকে দীর্ঘজীবী করুন, প্রিয় শিশু।'
+        ]
+    },
+    
+    'festival': {
+        'normal': [
+            'শুভ বিজয়া {name}!',
+            'ঈদ মোবারক {name}।',
+            'পূজার শুভেচ্ছা {name}।'
+        ],
+        'poetic': [
+            'উৎসবের আলোয় ভরে যাক আপনার জীবন। শুভেচ্ছা {name}।',
+            'আনন্দের বার্তা বহন করে আনুক এই উৎসব।'
+        ],
+        'blessing': [
+            'সকলের মঙ্গল হোক, এই কামনা করি। শুভ উৎসব {name}।',
+            'পূজা-পার্বণে পরিবারের সকলের সাথে সুস্থ থাকুন।'
+        ]
+    },
+    
+    'default': {
+        'normal': [
+            'শুভেচ্ছা নিও {name}।',
+            'শুভকামনা রইল।',
+            'আপনার মঙ্গল কামনা করি {name}।'
+        ],
+        'emotional': [
+            'ভালো থেকো সবসময় {name}।',
+            'তোমার সুখ就是我最大的快乐 {name}。',
+            'তোমার প্রতি আমার শুভকামনা всегда अटूट {name}।'
+        ],
+        'funny': [
+            'হাসি মুখে থেকো {name}!',
+            'পার্টি কবে দিচ্ছো {name}?',
+            'গিফটের অপেক্ষায় আছি {name}!'
+        ],
+        'poetic': [
+            'ফুলের মতো সুন্দর হোক তোমার জীবন {name}।',
+            'নদীর মত বয়ে যাক তোমার সুখের ধারা {name}।',
+            'আকাশের নক্ষত্রের মত উজ্জ্বল হোক তোমার পথ {name}।'
+        ]
+    }
+};
+
+        const quickTemplates = {
+            'birthday': { label: 'জন্মদিন', h: 'শুভ জন্মদিন!', m: 'তোমার আগামীর দিনগুলো আনন্দে ভরে উঠুক। শুভ জন্মদিন!', f: 'শুভেচ্ছান্তে', bg: 'rainbow', icon: '🎂' },
+            'anniversary': { label: 'বার্ষিকী', h: 'শুভ বিবাহ বার্ষিকী!', m: 'তোমাদের ভালোবাসা যেন চিরকাল অটুট থাকে। শুভ বিবাহ বার্ষিকী!', f: 'ভালোবাসা সহ', bg: 'hearts', icon: '💍' },
+            'eid': { label: 'ঈদ', h: 'ঈদ মোবারক', m: 'এই ঈদের আনন্দ আপনার এবং আপনার পরিবারের জীবনে সুখ ও শান্তি বয়ে আনুক।', f: 'ঈদ শুভেচ্ছা', bg: 'moonlight', icon: '🌙' },
+            'newyear': { label: 'নববর্ষ', h: 'শুভ নববর্ষ', m: 'নতুন বছর আপনার জীবনে নতুন আশা এবং সাফল্য নিয়ে আসুক।', f: 'শুভেচ্ছান্তে', bg: 'fire', icon: '🎉' },
+            'valentine': { label: 'ভ্যালেন্টাইন', h: 'হ্যাপি ভ্যালেন্টাইনস ডে', m: 'আমার জীবনের সবচেয়ে বিশেষ মানুষটিকে ভালোবাসা দিবসের অনেক অনেক শুভেচ্ছা।', f: 'তোমার প্রিয়', bg: 'rose', icon: '❤️' },
+            'thankyou': { label: 'ধন্যবাদ', h: 'ধন্যবাদ!', m: 'আপনার সহযোগিতার জন্য আমি চিরকৃতজ্ঞ। অনেক ধন্যবাদ।', f: 'বিনীত', bg: 'mint', icon: '🙏' },
+            'wedding': { label: 'বিয়ে', h: 'শুভ বিবাহ', m: 'তোমাদের নতুন জীবন সুখের হোক। দম্পতির জন্য অনেক দোয়া ও শুভকামনা।', f: 'শুভেচ্ছান্তে', bg: 'royal', icon: '💒' },
+            'graduation': { label: 'গ্র্যাজুয়েশন', h: 'অভিনন্দন!', m: 'তোমার এই সাফল্যে আমরা গর্বিত। ভবিষ্যতের জন্য শুভকামনা।', f: 'আশীর্বাদ সহ', bg: 'gold-luxury', icon: '🎓' },
+            'newbaby': { label: 'শিশুর জন্ম', h: 'স্বাগতম নতুন অতিথি!', m: 'নবজাতকের আগমনে আপনাদের পরিবারে খুশির জোয়ার বয়ে যাক।', f: 'দোয়া রইল', bg: 'sky', icon: '👶' },
+            'getwell': { label: 'দ্রুত সুস্থ হোন', h: 'দ্রুত সুস্থ হোন', m: 'তোমার দ্রুত আরোগ্য কামনা করছি। নিজের যত্ন নিও।', f: 'শুভকামনা', bg: 'nature', icon: '🤒' },
+            'success': { label: 'সাফল্য', h: 'সাফল্যের শুভেচ্ছা', m: 'তোমার এই অর্জন অন্যদের জন্য অনুপ্রেরণা। এগিয়ে যাও!', f: 'শুভেচ্ছান্তে', bg: 'golden', icon: '🏆' },
+            'friendship': { label: 'বন্ধুত্ব', h: 'শুভ বন্ধু দিবস', m: 'বন্ধু, তুমি আমার জীবনের অন্যতম সেরা উপহার।', f: 'তোমার বন্ধু', bg: 'bubblegum', icon: '🤝' },
+            'mothersday': { label: 'মা দিবস', h: 'শুভ মা দিবস', m: 'মা, তোমার তুলনা তুমিই। তোমাকে অনেক ভালোবাসি।', f: 'তোমার সন্তান', bg: 'floral', icon: '🤱' },
+            'fathersday': { label: 'বাবা দিবস', h: 'শুভ বাবা দিবস', m: 'বাবা, তুমিই আমার সুপারহিরো। ভালো থেকো সবসময়।', f: 'তোমার সন্তান', bg: 'ocean', icon: '👨‍👧' },
+            'pohela': { label: 'পহেলা বৈশাখ', h: 'শুভ নববর্ষ', m: 'এসো হে বৈশাখ, এসো এসো। নতুন বছর সবার জন্য মঙ্গল বয়ে আনুক।', f: 'শুভকামনা', bg: 'festive', icon: '👺' },
+            'christmas': { label: 'ক্রিসমাস', h: 'শুভ বড়দিন', m: 'বড়দিনের আনন্দ সবার মাঝে ছড়িয়ে পড়ুক। মেরি ক্রিসমাস!', f: 'শুভেচ্ছান্তে', bg: 'winter', icon: '🎄' }
+        };
+
+        const decorationItems = ['🎈','🎂','🎉','🎁','🕯️','🌹','💐','🌸','❤️','⭐','🌙','🍬','🍫','🍦','🧸','💍','🎓','🏆','⚽','🦋','🐝','🐱','🐶','🦄','👑','🕶️','📷','🎵','🚗','✈️','🚀','🎸','🏝️','🍔','🍕'];
+        const frameStyles = { 'none': 'none', 'simple-white': '10px solid white', 'simple-black': '10px solid #333', 'double-gold': 'double 10px gold', 'dashed-blue': '5px dashed #667eea', 'dotted-red': '5px dotted #ff4757', 'inset-shadow': 'inset 0 0 20px rgba(0,0,0,0.5)', 'vintage-border': '15px solid #d4b896', 'neon-border': '5px solid #00f2fe', 'groove': '10px groove #9333ea', 'ridge': '10px ridge #ec4899', 'inset': '15px inset rgba(255,255,255,0.5)', 'outset': '15px outset rgba(255,255,255,0.5)', 'frame-art': '20px solid transparent; border-image: linear-gradient(to right, red, orange) 1', 'rainbow-border': '5px solid transparent', 'double-line': 'double 6px #fff', 'dashed-gradient': '8px dashed #fff', 'modern-art': '10px solid rgba(255,255,255,0.3)', 'classic-gold': '12px solid #daa520' };
+        const shapeStyles = { 'rectangle': { clip: 'none', label: 'চারকোনা' }, 'rounded': { clip: 'inset(0% round 30px)', label: 'রাউন্ড' }, 'circle': { clip: 'circle(50% at 50% 50%)', label: 'বৃত্ত' }, 'diamond': { clip: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', label: 'ডায়মন্ড' }, 'hexagon': { clip: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)', label: 'হেক্সাগন' }, 'pentagon': { clip: 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)', label: 'পেন্টাগন' }, 'message': { clip: 'polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%)', label: 'মেসেজ' }, 'shield': { clip: 'polygon(50% 0, 100% 0, 100% 35%, 50% 100%, 0 35%, 0 0)', label: 'শিল্ড' }, 'star': { clip: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)', label: 'স্টার' }, 'cloud': { clip: 'ellipse(100% 100% at 50% 50%)', label: 'ক্লাউড' }, 'ticket': { clip: 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)', label: 'টিকেট' }, 'blob1': { clip: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', label: 'ব্লব ১' }, 'window': { clip: 'polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)', label: 'উইন্ডো' } };
+        
+        const textureStyles = {
+            'none': { bg: 'none', label: 'নেই' },
+            'dots': { bg: 'radial-gradient(#000 1px, transparent 1px)', size: '20px 20px', label: 'ডটস' },
+            'lines': { bg: 'repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%)', size: '10px 10px', label: 'লাইনস' },
+            'grid': { bg: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', size: '20px 20px', label: 'গ্রিড' },
+            'zigzag': { bg: 'linear-gradient(135deg, #000 25%, transparent 25%) -10px 0, linear-gradient(225deg, #000 25%, transparent 25%) -10px 0, linear-gradient(315deg, #000 25%, transparent 25%), linear-gradient(45deg, #000 25%, transparent 25%)', size: '20px 20px', label: 'জিগজ্যাগ' },
+            'noise': { bg: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.1\'/%3E%3C/svg%3E")', size: 'cover', label: 'নয়েজ' },
+            'paper': { bg: 'repeating-linear-gradient(#f0f0f0, #f0f0f0 1px, #fff 1px, #fff 20px)', size: '100% 100%', label: 'কাগজ' },
+            'grunge': { bg: 'radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent) 50px 50px', size: '100px 100px', label: 'গ্রঞ্জ' },
+            'fabric': { bg: 'radial-gradient(hsla(0, 0%, 0%, 0.1) 15%, transparent 16%) 0 0, radial-gradient(hsla(0, 0%, 0%, 0.1) 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px', size: '16px 16px', label: 'কাপড়' }
+        };
+
+        const backgrounds = { 'rainbow': 'linear-gradient(135deg, #ff6b6b, #ff8e53, #ffd93d, #6bcf7f, #4d96ff, #9d4dff)', 'floral': 'linear-gradient(135deg, #ff9a9e, #fecfef, #fad0c4)', 'dreamy': 'linear-gradient(135deg, #a8edea, #fed6e3)', 'starry': 'linear-gradient(135deg, #000428, #004e92)', 'hearts': 'linear-gradient(135deg, #ff6b9d, #c779d0, #ff9a3c)', 'nature': 'linear-gradient(135deg, #56ab2f, #a8e063)', 'royal': 'linear-gradient(135deg, #8E2DE2, #4A00E0)', 'gradient': 'linear-gradient(135deg, #667eea, #764ba2)', 'golden': 'linear-gradient(135deg, #FFD700, #FFA500, #FF8C00)', 'pastel': 'linear-gradient(135deg, #ffafcc, #bde0fe, #a2d2ff)', 'sunset': 'linear-gradient(135deg, #ff7e5f, #feb47b)', 'ocean': 'linear-gradient(135deg, #2193b0, #6dd5ed)', 'galaxy': 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)', 'vintage': 'linear-gradient(135deg, #8B7355, #C4A484, #D4B896)', 'neon': 'linear-gradient(135deg, #DA22FF, #9733EE)', 'mint': 'linear-gradient(135deg, #11998e, #38ef7d)', 'cherry': 'linear-gradient(135deg, #FC466B, #3F5EFB)', 'fire': 'linear-gradient(135deg, #f12711, #f5af19)', 'sky': 'linear-gradient(135deg, #00d2ff, #3a7bd5)', 'rose': 'linear-gradient(135deg, #ec008c, #fc6767)', 'aurora': 'linear-gradient(135deg, #00c6ff, #0072ff, #7209b7, #f72585, #ffbe0b)', 'candy': 'linear-gradient(135deg, #ff9a9e, #fecfef, #a8edea)', 'midnight': 'linear-gradient(135deg, #232526, #414345)', 'lavender': 'linear-gradient(135deg, #e0c3fc, #8ec5fc)', 'peach': 'linear-gradient(135deg, #ffecd2, #fcb69f)', 'emerald': 'linear-gradient(135deg, #11998e, #38ef7d, #11998e)', 'copper': 'linear-gradient(135deg, #b8860b, #cd853f, #daa520)', 'silver': 'linear-gradient(135deg, #c0c0c0, #e8e8e8, #a9a9a9)', 'tropical': 'linear-gradient(135deg, #00b4db, #00d4ff, #7b68ee, #ff6b6b)', 'coffee': 'linear-gradient(135deg, #6f4e37, #c4a77d, #8b4513)', 'berry': 'linear-gradient(135deg, #8e44ad, #3498db, #9b59b6)', 'autumn': 'linear-gradient(135deg, #ff6b35, #f7931e, #ffc300, #8b0000)', 'winter': 'linear-gradient(135deg, #e0f7fa, #b2ebf2, #4dd0e1, #26c6da)', 'spring': 'linear-gradient(135deg, #ffeaa7, #81ecec, #fab1a0, #ff7675)', 'summer': 'linear-gradient(135deg, #f39c12, #e74c3c, #9b59b6, #1abc9c)', 'cosmic': 'linear-gradient(135deg, #0c0c0c, #1a1a2e, #0f3460, #e94560)', 'marble': 'linear-gradient(135deg, #f5f5f5, #e0e0e0, #bdbdbd, #757575)', 'watercolor': 'linear-gradient(135deg, #a8e6cf, #dcedc1, #ffd3a5, #f9a7b0)', 'festive': 'linear-gradient(135deg, #ff0844, #ffb199, #ffd700, #00c853)', 'elegant': 'linear-gradient(135deg, #1a1a2e, #0f3460, #533483, #e94560)', 'holographic': 'linear-gradient(135deg, #a8ff78, #78ffd6, #a8c0ff, #c9a8ff, #ffa8c9)', 'neonpink': 'linear-gradient(135deg, #ff0080, #ff8c00, #ff0080)', 'forestgreen': 'linear-gradient(135deg, #134e5e, #71b280)', 'sunflower': 'linear-gradient(135deg, #f7971e, #ffd200)', 'moonlight': 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', 'rainbow2': 'linear-gradient(135deg, #f093fb, #f5576c, #4facfe, #00f2fe, #43e97b)', 'icecream': 'linear-gradient(135deg, #fff1eb, #ace0f9, #fff5f5)', 'bubblegum': 'linear-gradient(135deg, #fbc2eb, #a6c1ee, #fbc2eb)', 'velvet': 'linear-gradient(135deg, #780206, #061161)', 'diamond': 'linear-gradient(135deg, #bdc3c7, #2c3e50, #bdc3c7)', 'cyberpunk': 'linear-gradient(135deg, #fce38a, #f38181, #000000)', 'crimson': 'linear-gradient(135deg, #870000, #190a05)', 'zen': 'linear-gradient(135deg, #C6FFDD, #FBD786, #f7797d)', 'electric-violet': 'linear-gradient(135deg, #4776E6, #8E54E9)', 'sunny-day': 'linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff)', 'night-city': 'linear-gradient(135deg, #141E30, #243B55)', 'misty-forest': 'linear-gradient(135deg, #3a6186, #89253e)', 'candy-cane': 'linear-gradient(135deg, #ffffff, #ff0000, #ffffff)', 'deep-space': 'linear-gradient(135deg, #000000, #434343)', 'gold-luxury': 'linear-gradient(135deg, #BF953F, #FCF6BA, #B38728)' };
+        const msgBoxStyles = { 'glass-white': { bg: 'rgba(255,255,255,0.95)', shadow: '0 10px 40px rgba(0,0,0,0.15)' }, 'glass-dark': { bg: 'rgba(30,41,59,0.9)', shadow: '0 10px 40px rgba(0,0,0,0.3)' }, 'gradient-pink': { bg: 'linear-gradient(135deg, rgba(255,182,193,0.95), rgba(255,105,180,0.85))', shadow: '0 10px 40px rgba(255,105,180,0.3)' }, 'gradient-blue': { bg: 'linear-gradient(135deg, rgba(173,216,230,0.95), rgba(100,149,237,0.85))', shadow: '0 10px 40px rgba(100,149,237,0.3)' }, 'gradient-purple': { bg: 'linear-gradient(135deg, rgba(221,160,221,0.95), rgba(138,43,226,0.85))', shadow: '0 10px 40px rgba(138,43,226,0.3)' }, 'gradient-green': { bg: 'linear-gradient(135deg, rgba(144,238,144,0.95), rgba(34,139,34,0.85))', shadow: '0 10px 40px rgba(34,139,34,0.3)' }, 'gradient-orange': { bg: 'linear-gradient(135deg, rgba(255,218,185,0.95), rgba(255,140,0,0.85))', shadow: '0 10px 40px rgba(255,140,0,0.3)' }, 'gradient-gold': { bg: 'linear-gradient(135deg, rgba(255,215,0,0.95), rgba(184,134,11,0.85))', shadow: '0 10px 40px rgba(184,134,11,0.3)' }, 'pastel-rainbow': { bg: 'linear-gradient(135deg, rgba(255,182,193,0.9), rgba(255,218,185,0.9), rgba(255,255,224,0.9))', shadow: '0 10px 40px rgba(255,182,193,0.3)' }, 'neon-glow': { bg: 'rgba(0,0,0,0.8)', shadow: '0 0 30px rgba(255,0,255,0.5), 0 0 60px rgba(0,255,255,0.3)' }, 'frosted': { bg: 'rgba(255,255,255,0.25)', shadow: '0 10px 40px rgba(255,255,255,0.2)' }, 'cream': { bg: 'rgba(255,253,208,0.95)', shadow: '0 10px 40px rgba(255,253,208,0.3)' }, 'mint-fresh': { bg: 'linear-gradient(135deg, rgba(189,252,201,0.95), rgba(152,251,152,0.85))', shadow: '0 10px 40px rgba(152,251,152,0.3)' }, 'rose-gold': { bg: 'linear-gradient(135deg, rgba(255,228,225,0.95), rgba(255,182,193,0.85))', shadow: '0 10px 40px rgba(255,182,193,0.3)' }, 'ocean-blue': { bg: 'linear-gradient(135deg, rgba(0,191,255,0.9), rgba(30,144,255,0.85))', shadow: '0 10px 40px rgba(30,144,255,0.3)' }, 'sunset-warm': { bg: 'linear-gradient(135deg, rgba(255,127,80,0.9), rgba(255,99,71,0.85))', shadow: '0 10px 40px rgba(255,99,71,0.3)' }, 'lavender-mist': { bg: 'rgba(230,230,250,0.95)', shadow: '0 10px 40px rgba(230,230,250,0.3)' }, 'coffee-latte': { bg: 'linear-gradient(135deg, rgba(210,180,140,0.95), rgba(139,69,19,0.85))', shadow: '0 10px 40px rgba(139,69,19,0.3)' }, 'cherry-blossom': { bg: 'linear-gradient(135deg, rgba(255,183,197,0.95), rgba(255,105,180,0.85))', shadow: '0 10px 40px rgba(255,105,180,0.3)' }, 'midnight-blue': { bg: 'linear-gradient(135deg, rgba(25,25,112,0.9), rgba(0,0,139,0.85))', shadow: '0 10px 40px rgba(0,0,139,0.3)' }, 'emerald-shine': { bg: 'linear-gradient(135deg, rgba(80,200,120,0.9), rgba(0,128,0,0.85))', shadow: '0 10px 40px rgba(0,128,0,0.3)' }, 'royal-purple': { bg: 'linear-gradient(135deg, rgba(147,112,219,0.9), rgba(75,0,130,0.85))', shadow: '0 10px 40px rgba(75,0,130,0.3)' }, 'silver-shine': { bg: 'linear-gradient(135deg, rgba(192,192,192,0.95), rgba(169,169,169,0.85))', shadow: '0 10px 40px rgba(169,169,169,0.3)' }, 'copper-glow': { bg: 'linear-gradient(135deg, rgba(184,115,51,0.9), rgba(139,90,43,0.85))', shadow: '0 10px 40px rgba(139,90,43,0.3)' }, 'transparent': { bg: 'transparent', shadow: 'none' }, 'candy-pink': { bg: 'linear-gradient(135deg, rgba(255,192,203,0.95), rgba(255,20,147,0.85))', shadow: '0 10px 40px rgba(255,20,147,0.3)' }, 'sky-blue': { bg: 'linear-gradient(135deg, rgba(135,206,235,0.95), rgba(70,130,180,0.85))', shadow: '0 10px 40px rgba(70,130,180,0.3)' }, 'spring-green': { bg: 'linear-gradient(135deg, rgba(0,255,127,0.9), rgba(60,179,113,0.85))', shadow: '0 10px 40px rgba(60,179,113,0.3)' }, 'coral-reef': { bg: 'linear-gradient(135deg, rgba(255,127,80,0.95), rgba(233,150,122,0.85))', shadow: '0 10px 40px rgba(233,150,122,0.3)' }, 'ice-cold': { bg: 'linear-gradient(135deg, rgba(224,255,255,0.95), rgba(175,238,238,0.85))', shadow: '0 10px 40px rgba(175,238,238,0.3)' }, 'fire-red': { bg: 'linear-gradient(135deg, rgba(255,69,0,0.9), rgba(178,34,34,0.85))', shadow: '0 10px 40px rgba(178,34,34,0.3)' }, 'lemon-yellow': { bg: 'linear-gradient(135deg, rgba(255,250,205,0.95), rgba(255,215,0,0.85))', shadow: '0 10px 40px rgba(255,215,0,0.3)' }, 'plum-purple': { bg: 'linear-gradient(135deg, rgba(221,160,221,0.95), rgba(148,0,211,0.85))', shadow: '0 10px 40px rgba(148,0,211,0.3)' }, 'peach-soft': { bg: 'linear-gradient(135deg, rgba(255,218,185,0.95), rgba(255,160,122,0.85))', shadow: '0 10px 40px rgba(255,160,122,0.3)' }, 'teal-dream': { bg: 'linear-gradient(135deg, rgba(0,128,128,0.9), rgba(32,178,170,0.85))', shadow: '0 10px 40px rgba(32,178,170,0.3)' }, 'magenta-pop': { bg: 'linear-gradient(135deg, rgba(255,0,255,0.9), rgba(199,21,133,0.85))', shadow: '0 10px 40px rgba(199,21,133,0.3)' }, 'olive-soft': { bg: 'linear-gradient(135deg, rgba(128,128,0,0.9), rgba(107,142,35,0.85))', shadow: '0 10px 40px rgba(107,142,35,0.3)' }, 'navy-deep': { bg: 'linear-gradient(135deg, rgba(0,0,128,0.9), rgba(25,25,112,0.85))', shadow: '0 10px 40px rgba(25,25,112,0.3)' }, 'bubblegum-soft': { bg: 'linear-gradient(135deg, rgba(255,182,193,0.95), rgba(255,105,180,0.8), rgba(219,112,147,0.85))', shadow: '0 10px 40px rgba(219,112,147,0.3)' }, 'aurora-glass': { bg: 'linear-gradient(135deg, rgba(0,255,127,0.7), rgba(0,191,255,0.7), rgba(138,43,226,0.7))', shadow: '0 10px 40px rgba(138,43,226,0.3)' }, 'paper-classic': { bg: 'repeating-linear-gradient(0deg, #fdfbf7, #fdfbf7 29px, #afe0fa 30px)', shadow: '0 2px 10px rgba(0,0,0,0.1)' }, 'dark-matter': { bg: 'rgba(0,0,0,0.95)', shadow: '0 0 50px rgba(255,255,255,0.1)' }, 'soft-lilac': { bg: 'linear-gradient(135deg, #e6e6fa, #d8bfd8)', shadow: '0 10px 30px rgba(216,191,216,0.5)' }, 'mint-choco': { bg: 'linear-gradient(135deg, #f5fffa, #e0ffff)', shadow: '0 10px 30px rgba(224,255,255,0.5)' }, 'border-rainbow': { bg: 'white', shadow: '0 0 0 5px #ff0000, 0 0 0 10px #00ff00, 0 0 0 15px #0000ff' }, 'glass-morphic': { bg: 'rgba(255,255,255,0.1)', shadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }, 'sepia-tone': { bg: 'rgba(112, 66, 20, 0.8)', shadow: '0 10px 40px rgba(112, 66, 20, 0.3)' }, 'blueprint': { bg: '#0052cc', shadow: '0 0 0 2px white, 0 0 20px blue' }, 'gothic-dark': { bg: '#2c3e50', shadow: 'inset 0 0 50px #000000' }, 'cyber-grid': { bg: 'rgba(0,0,0,0.8)', shadow: '0 0 10px #00ff00' } };
+        const fontStyles = { 'baloo': "'Baloo Da 2', cursive", 'hind': "'Hind Siliguri', sans-serif", 'noto': "'Noto Sans Bengali', sans-serif", 'atma': "'Atma', cursive", 'tiro': "'Tiro Bangla', serif", 'galada': "'Galada', cursive", 'anek': "'Anek Bangla', sans-serif", 'notoserif': "'Noto Serif Bengali', serif", 'mukta': "'Mukta', sans-serif", 'mina': "'Mina', sans-serif", 'kalam': "'Kalam', cursive", 'eczar': "'Eczar', serif", 'alkatra': "'Alkatra', cursive", 'khand': "'Khand', sans-serif", 'tillana': "'Tillana', cursive", 'yatra': "'Yatra One', cursive", 'rozha': "'Rozha One', serif", 'laila': "'Laila', sans-serif", 'lobster': "'Lobster', cursive", 'dancing': "'Dancing Script', cursive", 'courgette': "'Courgette', cursive", 'caveat': "'Caveat', cursive", 'comfortaa': "'Comfortaa', cursive", 'indieflower': "'Indie Flower', cursive", 'sacramento': "'Sacramento', cursive", 'amatic': "'Amatic SC', cursive", 'righteous': "'Righteous', cursive", 'berkshire': "'Berkshire Swash', cursive", 'monoton': "'Monoton', cursive", 'bungee': "'Bungee Shade', cursive", 'orbitron': "'Orbitron', sans-serif", 'bangers': "'Bangers', cursive", 'specialelite': "'Special Elite', cursive", 'fredericka': "'Fredericka the Great', cursive", 'audiowide': "'Audiowide', cursive" };
+        const colors = [ '#1e293b', '#7c3aed', '#2563eb', '#059669', '#dc2626', '#d97706', '#db2777', '#0891b2', '#4f46e5', '#0d9488', '#9333ea', '#be185d', '#065f46', '#1e40af', '#92400e', '#831843', '#ffffff', '#f8fafc', '#fbbf24', '#f472b6', '#34d399', '#60a5fa', '#a78bfa', '#fb923c', '#f87171', '#2dd4bf', '#c084fc', '#facc15', '#4ade80', '#38bdf8', '#e879f9', '#000000', '#ff6b6b', '#5f27cd', '#00d2d3', '#ff9ff3', '#54a0ff', '#5f0f40', '#006d77', '#e9c46a' ];
+
+        window.onload = function() { 
+            renderOptions(); 
+            wishcardUpdateCard(); 
+            saveState(); // Initial State
+            // Init Draggable
+            makeDraggable(document.getElementById('dateBadge'));
+            makeDraggable(document.getElementById('qrCodeContainer'));
+        };
+
+        // --- Undo/Redo Logic ---
+        function saveState() {
+            // Save simpler state 
+            const state = {
+                style: wishcardCurrentStyle,
+                color: wishcardCurrentColor,
+                font: wishcardCurrentFont,
+                msgBox: wishcardCurrentMsgBox,
+                frame: wishcardCurrentFrame,
+                shape: wishcardCurrentShape,
+                texture: wishcardCurrentTexture,
+                heading: document.getElementById('wishcardHeading').value,
+                message: document.getElementById('wishcardMessage').value,
+                footer: document.getElementById('wishcardFooter').value,
+                hSize: document.getElementById('headingSize').value,
+                mSize: document.getElementById('messageSize').value,
+                fSize: document.getElementById('footerSize').value,
+                bgBlur: document.getElementById('bgBlur').value,
+                bgBright: document.getElementById('bgBrightness').value,
+                stroke: document.getElementById('textStroke').value,
+                shadow: document.getElementById('textShadow').value
+            };
+            
+            historyStack.push(JSON.stringify(state));
+            if(historyStack.length > MAX_HISTORY) historyStack.shift();
+            redoStack = []; 
+            updateUndoRedoButtons();
+        }
+
+        function undo() {
+            if(historyStack.length > 1) {
+                redoStack.push(historyStack.pop()); 
+                const prevState = JSON.parse(historyStack[historyStack.length - 1]);
+                applyState(prevState);
+            }
+        }
+
+        function redo() {
+            if(redoStack.length > 0) {
+                const nextState = JSON.parse(redoStack.pop());
+                historyStack.push(JSON.stringify(nextState));
+                applyState(nextState);
+            }
+        }
+
+        function applyState(state) {
+            wishcardCurrentStyle = state.style;
+            wishcardCurrentColor = state.color;
+            wishcardCurrentFont = state.font;
+            wishcardCurrentMsgBox = state.msgBox;
+            wishcardCurrentFrame = state.frame;
+            wishcardCurrentShape = state.shape;
+            wishcardCurrentTexture = state.texture;
+            
+            document.getElementById('wishcardHeading').value = state.heading;
+            document.getElementById('wishcardMessage').value = state.message;
+            document.getElementById('wishcardFooter').value = state.footer;
+            document.getElementById('headingSize').value = state.hSize;
+            document.getElementById('messageSize').value = state.mSize;
+            document.getElementById('footerSize').value = state.fSize;
+            document.getElementById('bgBlur').value = state.bgBlur;
+            document.getElementById('bgBrightness').value = state.bgBright;
+            document.getElementById('textStroke').value = state.stroke;
+            document.getElementById('textShadow').value = state.shadow;
+
+            // Re-render selections UI (Use the new scoped function)
+            updateUI('styleOptionsContainer', '.wishcard-style-btn', state.style);
+            updateUI('msgBoxOptionsContainer', '.wishcard-msgbox-btn', state.msgBox);
+            updateUI('frameOptionsContainer', '.wishcard-frame-btn', state.frame);
+            updateUI('shapeOptionsContainer', '.wishcard-shape-btn', state.shape);
+            updateUI('textureOptionsContainer', '.wishcard-texture-btn', state.texture);
+            
+            wishcardUpdateCard();
+            updateUndoRedoButtons();
+        }
+
+        function updateUndoRedoButtons() {
+            const undoBtns = document.querySelectorAll('.undo-redo-btn');
+            undoBtns[0].disabled = historyStack.length <= 1;
+            undoBtns[1].disabled = redoStack.length === 0;
+        }
+
+        function renderOptions() {
+            // Render Grids (Standard V6.5 code)
+            const tempContainer = document.getElementById('templateOptionsContainer');
+            Object.keys(quickTemplates).forEach(key => { tempContainer.innerHTML += `<div class="wishcard-template-btn" onclick="applyTemplate('${key}')"><div style="font-size:18px;margin-bottom:5px;">${quickTemplates[key].icon}</div>${quickTemplates[key].label}</div>`; });
+
+            const decoContainer = document.getElementById('decorationContainer');
+            decorationItems.forEach(item => { decoContainer.innerHTML += `<div class="decoration-item" onclick="addDecoration('${item}')">${item}</div>`; });
+
+            const frameContainer = document.getElementById('frameOptionsContainer');
+            Object.keys(frameStyles).forEach(key => { frameContainer.innerHTML += `<div class="wishcard-frame-btn ${key==='none'?'active':''}" data-key="${key}" onclick="selectFrame('${key}')"><div style="width:30px;height:20px;border:${frameStyles[key]};background:#eee;"></div><span class="wishcard-frame-name">${key}</span></div>`; });
+
+            const shapeContainer = document.getElementById('shapeOptionsContainer');
+            Object.keys(shapeStyles).forEach(key => { shapeContainer.innerHTML += `<div class="wishcard-shape-btn ${key==='rectangle'?'active':''}" data-key="${key}" onclick="selectShape('${key}')"><div style="width:30px;height:30px;background:#cbd5e1;clip-path:${shapeStyles[key].clip};"></div><span class="wishcard-shape-name">${shapeStyles[key].label}</span></div>`; });
+
+            const styleContainer = document.getElementById('styleOptionsContainer');
+            Object.keys(backgrounds).forEach(key => { styleContainer.innerHTML += `<div class="wishcard-style-btn ${key==='rainbow'?'active':''}" data-key="${key}" onclick="selectStyle('${key}')"><div style="width:100%;height:100%;background:${backgrounds[key]};border-radius:6px;"></div><span class="wishcard-style-name">${key.slice(0,6)}..</span></div>`; });
+            
+            const textureContainer = document.getElementById('textureOptionsContainer');
+            Object.keys(textureStyles).forEach(key => { textureContainer.innerHTML += `<div class="wishcard-texture-btn ${key==='none'?'active':''}" data-key="${key}" onclick="selectTexture('${key}')"><div style="width:100%;height:100%;background:${textureStyles[key].bg};background-size:${textureStyles[key].size};border-radius:6px;border:1px solid #ddd;"></div><span class="wishcard-texture-name">${textureStyles[key].label}</span></div>`; });
+
+            const msgBoxContainer = document.getElementById('msgBoxOptionsContainer');
+            Object.keys(msgBoxStyles).forEach(key => { msgBoxContainer.innerHTML += `<div class="wishcard-msgbox-btn ${key==='glass-white'?'active':''}" data-key="${key}" onclick="selectMsgBox('${key}')"><div class="wishcard-msgbox-preview" style="background:${msgBoxStyles[key].bg};"></div><span class="wishcard-msgbox-name">${key.slice(0,8)}..</span></div>`; });
+
+            const colorContainer = document.getElementById('colorOptionsContainer');
+            colors.forEach((c, i) => { colorContainer.innerHTML += `<div class="wishcard-color-btn ${i===0?'active':''}" style="background:${c};" onclick="selectColor('${c}', this)"></div>`; });
+
+            const fontContainer = document.getElementById('fontOptionsContainer');
+            Object.keys(fontStyles).forEach(key => { fontContainer.innerHTML += `<div class="wishcard-font-btn ${key==='baloo'?'active':''}" style="font-family:${fontStyles[key]}" onclick="selectFont('${key}', this)">${key}</div>`; });
+        }
+
+        // --- Bug Fix: Scoped Selection Logic ---
+        function updateUI(containerId, itemClass, activeKey) {
+             const container = document.getElementById(containerId);
+             if(!container) return;
+             const buttons = container.querySelectorAll(itemClass);
+             buttons.forEach(btn => {
+                 // Use dataset.key if available, else fallback to innerHTML check (for fonts)
+                 const key = btn.dataset.key; 
+                 if (key === activeKey) btn.classList.add('active');
+                 else if (!key && btn.innerHTML.includes(activeKey.slice(0,4))) btn.classList.add('active'); // Fallback
+                 else btn.classList.remove('active');
+            });
+        }
+
+        // Selection Handlers
+        function selectStyle(key) { wishcardCurrentStyle=key; customBgImage=null; document.getElementById('removeBgBtn').style.display='none'; updateUI('styleOptionsContainer', '.wishcard-style-btn', key); wishcardUpdateCard(); saveState(); }
+        function selectMsgBox(key) { wishcardCurrentMsgBox=key; customMsgBoxImage=null; document.getElementById('removeBoxBtn').style.display='none'; updateUI('msgBoxOptionsContainer', '.wishcard-msgbox-btn', key); wishcardUpdateCard(); saveState(); }
+        function selectFrame(key) { wishcardCurrentFrame=key; updateUI('frameOptionsContainer', '.wishcard-frame-btn', key); wishcardUpdateCard(); saveState(); }
+        function selectShape(key) { wishcardCurrentShape=key; updateUI('shapeOptionsContainer', '.wishcard-shape-btn', key); wishcardUpdateCard(); saveState(); }
+        function selectTexture(key) { wishcardCurrentTexture=key; updateUI('textureOptionsContainer', '.wishcard-texture-btn', key); wishcardUpdateCard(); saveState(); }
+        
+        function selectColor(c, el) { 
+            wishcardCurrentColor=c; 
+            document.querySelectorAll('.wishcard-color-btn').forEach(b=>b.classList.remove('active')); 
+            el.classList.add('active'); 
+            wishcardUpdateCard(); saveState(); 
+        }
+        function selectCustomColor(c) { 
+            wishcardCurrentColor=c; 
+            document.querySelectorAll('.wishcard-color-btn').forEach(b=>b.classList.remove('active')); 
+            wishcardUpdateCard(); saveState(); 
+        }
+        function selectFont(f, el) { 
+            wishcardCurrentFont=f; 
+            document.querySelectorAll('.wishcard-font-btn').forEach(b=>b.classList.remove('active')); 
+            el.classList.add('active'); 
+            wishcardUpdateCard(); saveState(); 
+        }
+
+        function applyTemplate(key) {
+            activeTemplateKey = key; 
+            const t = quickTemplates[key];
+            if(!t) return;
+            document.getElementById('wishcardHeading').value = t.h;
+            document.getElementById('wishcardMessage').value = t.m;
+            document.getElementById('wishcardFooter').value = t.f;
+            selectStyle(t.bg);
+            addDecoration(t.icon);
+            wishcardUpdateCard();
+            saveState();
+        }
+
+        // AI 2.0
+        function generateSmartQuote() {
+            const mood = document.getElementById('moodSelector').value;
+            const name = document.getElementById('aiName').value.trim();
+            const relation = document.getElementById('aiRelation').value;
+            let category = activeTemplateKey;
+            if(relation !== 'friend' && quoteDatabase[relation]) category = relation;
+            else if (!quoteDatabase[category]) category = 'default';
+            
+            let quotesList = quoteDatabase[category][mood];
+            if(!quotesList) quotesList = quoteDatabase[category]['normal'] || quoteDatabase['default']['normal'];
+            let randomQuote = quotesList[Math.floor(Math.random() * quotesList.length)];
+            randomQuote = randomQuote.replace(/{name}/g, name ? name : '').replace('  ', ' ').trim();
+            document.getElementById('wishcardMessage').value = randomQuote;
+            wishcardUpdateCard(); saveState();
+        }
+
+        // Voice
+        function toggleVoiceInput() {
+            if (!('webkitSpeechRecognition' in window)) { alert("ব্রাউজারে সাপোর্ট নেই। Chrome ব্যবহার করুন।"); return; }
+            if (recognition && recognition.listening) { recognition.stop(); return; }
+            recognition = new webkitSpeechRecognition();
+            recognition.lang = 'bn-BD';
+            recognition.interimResults = false;
+            const btn = document.getElementById('micBtn');
+            recognition.onstart = function() { recognition.listening = true; btn.classList.add('listening'); };
+            recognition.onend = function() { recognition.listening = false; btn.classList.remove('listening'); };
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                const textBox = document.getElementById('wishcardMessage');
+                textBox.value = textBox.value + " " + transcript;
+                wishcardUpdateCard(); saveState();
+            };
+            recognition.start();
+        }
+
+        function generateQR() {
+            const text = document.getElementById('qrText').value;
+            if(!text) { alert('টেক্সট বা লিংক দিন'); return; }
+            const url = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}`;
+            const container = document.getElementById('qrCodeContainer');
+            container.innerHTML = `<img src="${url}" crossorigin="anonymous" alt="QR Code">`;
+            container.style.display = 'block';
+            makeDraggable(container);
+        }
+        function removeQR() { document.getElementById('qrCodeContainer').style.display = 'none'; document.getElementById('qrText').value = ''; }
+        function resizeQR(val) { const qr = document.getElementById('qrCodeContainer'); qr.style.width = val + 'px'; qr.style.height = val + 'px'; }
+
+        // --- Draggable & Resizable Element Logic ---
+        function selectElement(el) {
+            if(selectedElement) selectedElement.classList.remove('selected');
+            selectedElement = el;
+            el.classList.add('selected');
+            document.getElementById('stickerControls').classList.add('active');
+            
+            const currentScale = el.getAttribute('data-scale') || 1;
+            document.getElementById('stickerSizeSlider').value = currentScale;
+            const currentOpacity = el.style.opacity || 1;
+            document.getElementById('stickerOpacitySlider').value = currentOpacity;
+        }
+
+        function resizeSelectedElement(val) {
+            if(selectedElement) {
+                selectedElement.style.transform = `scale(${val})`;
+                selectedElement.setAttribute('data-scale', val);
+            }
+        }
+        
+        function changeSelectedOpacity(val) { if(selectedElement) selectedElement.style.opacity = val; }
+        
+        function changeSelectedLayer(action) {
+             if(selectedElement) {
+                if(action === 'back') {
+                    selectedElement.classList.remove('z-front'); selectedElement.classList.add('z-back');
+                } else {
+                    selectedElement.classList.remove('z-back'); selectedElement.classList.add('z-front');
+                }
+            }
+        }
+
+        function deleteSelectedElement() {
+            if(selectedElement) {
+                selectedElement.remove();
+                selectedElement = null;
+                document.getElementById('stickerControls').classList.remove('active');
+            }
+        }
+
+        function makeDraggable(elmnt) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            elmnt.onmousedown = dragMouseDown;
+            elmnt.ontouchstart = dragTouchStart;
+            elmnt.addEventListener('click', function(e) { e.stopPropagation(); selectElement(elmnt); });
+
+            function dragMouseDown(e) {
+                e = e || window.event; e.preventDefault();
+                pos3 = e.clientX; pos4 = e.clientY;
+                document.onmouseup = closeDragElement; document.onmousemove = elementDrag;
+            }
+            function dragTouchStart(e) {
+                const touch = e.touches[0];
+                pos3 = touch.clientX; pos4 = touch.clientY;
+                document.ontouchend = closeDragElement; document.ontouchmove = elementDragTouch;
+            }
+            function elementDrag(e) {
+                e = e || window.event; e.preventDefault();
+                pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY;
+                pos3 = e.clientX; pos4 = e.clientY;
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px"; elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+            function elementDragTouch(e) {
+                const touch = e.touches[0];
+                pos1 = pos3 - touch.clientX; pos2 = pos4 - touch.clientY;
+                pos3 = touch.clientX; pos4 = touch.clientY;
+                if(e.cancelable) e.preventDefault();
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px"; elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+            function closeDragElement() {
+                document.onmouseup = null; document.onmousemove = null; document.ontouchend = null; document.ontouchmove = null;
+            }
+        }
+
+        // --- Decoration & Overlay ---
+        function addDecoration(icon) {
+            const container = document.getElementById('overlayLayer');
+            const el = document.createElement('div');
+            el.className = 'draggable-decoration movable-element z-front';
+            el.innerHTML = icon;
+            el.style.left = '40%'; el.style.top = '40%';
+            el.style.pointerEvents = 'auto'; 
+            makeDraggable(el);
+            container.appendChild(el);
+            selectElement(el);
+        }
+
+        function handleAddOverlay(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const container = document.getElementById('overlayLayer');
+                    const el = document.createElement('div');
+                    el.className = 'draggable-image movable-element z-front';
+                    el.style.left = '30%'; el.style.top = '30%';
+                    el.style.pointerEvents = 'auto';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    el.appendChild(img);
+                    makeDraggable(el);
+                    container.appendChild(el);
+                    input.value = ''; 
+                    selectElement(el);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function clearDecorations() {
+            document.getElementById('overlayLayer').innerHTML = '';
+            selectedElement = null;
+            document.getElementById('stickerControls').classList.remove('active');
+        }
+
+        // --- Custom Inputs & Removal ---
+        function updateDateText() {
+            const val = document.getElementById('customDateInput').value;
+            const badge = document.getElementById('dateBadge');
+            if(val) badge.innerHTML = val.replace(/\n/g, '<br>');
+            else { const d = new Date(); badge.innerHTML = `${d.getDate()}<br><span style="font-size:10px;text-transform:uppercase;">${d.toLocaleString('default', { month: 'short' })}</span>`; }
+        }
+
+        function handleMsgBoxUpload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) { customMsgBoxImage = e.target.result; document.getElementById('removeBoxBtn').style.display='block'; wishcardUpdateCard(); }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function removeCustomBox() { customMsgBoxImage = null; document.getElementById('removeBoxBtn').style.display='none'; document.getElementById('msgBoxUpload').value = ''; wishcardUpdateCard(); }
+
+        function handleBgUpload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) { customBgImage = e.target.result; document.getElementById('removeBgBtn').style.display='block'; wishcardUpdateCard(); }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function removeCustomBg() { customBgImage = null; document.getElementById('removeBgBtn').style.display='none'; document.getElementById('bgUpload').value = ''; wishcardUpdateCard(); }
+
+        function setAlignment(align) {
+            currentAlignment = align;
+            document.querySelectorAll('.align-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            wishcardUpdateCard(); saveState();
+        }
+        function resizeElement(id, scale) { const el = document.getElementById(id); el.style.transform = `scale(${scale})`; }
+        function toggleSection(el) { el.classList.toggle('collapsed'); el.nextElementSibling.classList.toggle('collapsed'); }
+
+        function wishcardRandomize() {
+            const styleKeys = Object.keys(backgrounds);
+            const msgBoxKeys = Object.keys(msgBoxStyles);
+            const fontKeys = Object.keys(fontStyles);
+            wishcardCurrentStyle = styleKeys[Math.floor(Math.random() * styleKeys.length)];
+            wishcardCurrentMsgBox = msgBoxKeys[Math.floor(Math.random() * msgBoxKeys.length)];
+            wishcardCurrentFont = fontKeys[Math.floor(Math.random() * fontKeys.length)];
+            wishcardCurrentColor = colors[Math.floor(Math.random() * colors.length)];
+            const shapes = Object.keys(shapeStyles);
+            wishcardCurrentShape = shapes[Math.floor(Math.random() * shapes.length)];
+            customBgImage = null; customMsgBoxImage = null;
+            document.getElementById('removeBgBtn').style.display='none';
+            document.getElementById('removeBoxBtn').style.display='none';
+            
+            // Re-render UI for random selections
+            updateUI('styleOptionsContainer', '.wishcard-style-btn', wishcardCurrentStyle);
+            updateUI('msgBoxOptionsContainer', '.wishcard-msgbox-btn', wishcardCurrentMsgBox);
+            // ... update others if needed, but these are primary visual changes
+            
+            wishcardUpdateCard(); saveState();
+        }
+
+        function wishcardUpdateCard() {
+            const heading = document.getElementById('wishcardHeading').value;
+            const message = document.getElementById('wishcardMessage').value;
+            const footer = document.getElementById('wishcardFooter').value;
+            const hSize = document.getElementById('headingSize').value + 'px';
+            const mSize = document.getElementById('messageSize').value + 'px';
+            const fSize = document.getElementById('footerSize').value + 'px';
+            const blurVal = document.getElementById('bgBlur').value;
+            const brightVal = document.getElementById('bgBrightness').value;
+            const strokeVal = document.getElementById('textStroke').value;
+            const shadowVal = document.getElementById('textShadow').value;
+            const showDate = document.getElementById('showDate').checked;
+
+            const cardContent = document.getElementById('wishcardContent');
+            const bg = document.getElementById('wishcardBackground');
+            const badge = document.getElementById('dateBadge');
+            const texture = document.getElementById('textureOverlay');
+            
+            document.getElementById('wishcardTitle').textContent = heading;
+            document.getElementById('wishcardMessagePreview').textContent = message;
+            document.getElementById('wishcardFooterPreview').innerHTML = footer.replace(/❤️/g, '<span class="wishcard-heart-icon">❤️</span>');
+
+            cardContent.style.color = wishcardCurrentColor;
+            cardContent.style.fontFamily = fontStyles[wishcardCurrentFont];
+            cardContent.style.textAlign = currentAlignment;
+            cardContent.style.alignItems = currentAlignment === 'center' ? 'center' : (currentAlignment === 'right' ? 'flex-end' : 'flex-start');
+            
+            const textStyle = `
+                -webkit-text-stroke: ${strokeVal}px ${wishcardCurrentColor === '#ffffff' ? '#000' : '#fff'};
+                text-shadow: ${shadowVal > 0 ? `2px 2px ${shadowVal}px rgba(0,0,0,0.5)` : 'none'};
+            `;
+            document.getElementById('wishcardTitle').style.cssText = `font-size: ${hSize}; ${textStyle}`;
+            document.getElementById('wishcardMessagePreview').style.cssText = `font-size: ${mSize}; white-space: pre-wrap; ${textStyle}`;
+            document.getElementById('wishcardFooterPreview').style.fontSize = fSize;
+
+            bg.style.filter = `blur(${blurVal}px) brightness(${brightVal}%)`;
+            if(customBgImage) { bg.style.background = `url(${customBgImage}) center/cover no-repeat`; bg.style.animation = 'none'; } 
+            else { 
+                bg.style.background = backgrounds[wishcardCurrentStyle]; 
+                bg.style.backgroundSize = '400% 400%'; 
+                bg.style.animation = 'gradientShift 15s ease infinite'; 
+                if(['starry','galaxy','midnight'].some(x=>wishcardCurrentStyle.includes(x))) {
+                     bg.style.backgroundImage = `${backgrounds[wishcardCurrentStyle]}, radial-gradient(white 1px, transparent 1px)`;
+                     bg.style.backgroundSize = '400% 400%, 50px 50px';
+                }
+            }
+            
+            if(wishcardCurrentTexture !== 'none') { const t = textureStyles[wishcardCurrentTexture]; texture.style.background = t.bg; texture.style.backgroundSize = t.size; } 
+            else { texture.style.background = 'none'; }
+
+            if (customMsgBoxImage) { cardContent.style.backgroundImage = `url(${customMsgBoxImage})`; cardContent.style.backgroundColor = 'transparent'; cardContent.style.boxShadow = '0 10px 40px rgba(0,0,0,0.3)'; } 
+            else { const box = msgBoxStyles[wishcardCurrentMsgBox]; cardContent.style.background = box.bg; cardContent.style.boxShadow = box.shadow; cardContent.style.backgroundImage = 'none'; }
+            
+            cardContent.style.clipPath = shapeStyles[wishcardCurrentShape].clip;
+
+            const mainCard = document.getElementById('wishcardPreview');
+            mainCard.style.border = 'none'; mainCard.style.borderImage = 'none';
+            if(wishcardCurrentFrame === 'rainbow-border') mainCard.style.border = '5px solid #ff4757';
+            else if(wishcardCurrentFrame === 'frame-art') { mainCard.style.border = '20px solid transparent'; mainCard.style.borderImage = 'linear-gradient(to right, #f6d365 0%, #fda085 100%) 1'; }
+            else mainCard.style.border = frameStyles[wishcardCurrentFrame];
+
+            if(showDate) { badge.style.display = 'block'; updateDateText(); makeDraggable(badge); } 
+            else { badge.style.display = 'none'; }
+
+            const isDarkBox = ['dark','neon','midnight','black','navy'].some(x => wishcardCurrentMsgBox.includes(x));
+            if(isDarkBox && !customMsgBoxImage && (wishcardCurrentColor === '#000000' || wishcardCurrentColor === '#1e293b')) cardContent.style.color = 'white';
+            else cardContent.style.color = wishcardCurrentColor;
+
+            generatedImageData = null;
+        }
+
+        async function generateImage() {
+            document.getElementById('wishcardLoading').style.display = 'flex';
+            const card = document.getElementById('wishcardPreview');
+            const btns = document.querySelector('.wishcard-action-buttons');
+            const ctrls = document.querySelector('.preview-controls');
+            
+            // Cleanup UI before capture
+            if(selectedElement) selectedElement.classList.remove('selected');
+            document.getElementById('stickerControls').classList.remove('active');
+            selectedElement = null;
+
+            btns.style.display = 'none';
+            ctrls.style.display = 'none';
+            
+            try {
+                // HD Configuration: scale 3
+                const canvas = await html2canvas(card, { scale: 3, useCORS: true, backgroundColor: null, allowTaint: true });
+                generatedImageData = canvas.toDataURL('image/png');
+                canvas.toBlob(b => generatedBlob = b);
+            } catch(e) { console.error(e); alert('ইমেজ তৈরিতে সমস্যা হয়েছে'); }
+
+            btns.style.display = 'flex';
+            ctrls.style.display = 'flex';
+            document.getElementById('wishcardLoading').style.display = 'none';
+        }
+
+        async function wishcardDownload() {
+            if(!generatedImageData) await generateImage();
+            const link = document.createElement('a');
+            link.download = `wish-card-${Date.now()}.png`;
+            link.href = generatedImageData;
+            link.click();
+        }
+
+        async function wishcardShareImage() {
+            if(!generatedImageData) await generateImage();
+            document.getElementById('wishcardShareModal').style.display = 'block';
+        }
+
+        async function wishcardNativeShare() {
+            if(!generatedBlob) await generateImage();
+            if(navigator.share) { try { await navigator.share({ files: [new File([generatedBlob], 'card.png', {type: 'image/png'})], title: 'উইশ কার্ড', text: document.getElementById('wishcardMessage').value }); } catch(e) {} } 
+            else { alert('শেয়ার সাপোর্ট নেই, ডাউনলোড হচ্ছে...'); wishcardDownload(); }
+        }
+        
+        function wishcardShareToFacebook() { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`); }
+        function wishcardShareToWhatsApp() { window.open(`https://wa.me/?text=${encodeURIComponent(window.location.href)}`); }
+        
+        document.getElementById('wishcardPreview').addEventListener('click', function(e) {
+            if(e.target === this || e.target.id === 'wishcardBackground') {
+                if(selectedElement) {
+                    selectedElement.classList.remove('selected');
+                    selectedElement = null;
+                    document.getElementById('stickerControls').classList.remove('active');
+                }
+            }
+        });
+        
+        ['wishcardHeading','wishcardMessage','wishcardFooter'].forEach(id => { document.getElementById(id).addEventListener('input', wishcardUpdateCard); });
+    </script>
+    
+    
+    <!-- JavaScript -->
+<script>
+// Get modal element
+const sharifulinfoModal = document.getElementById('sharifulinfoModal');
+
+// Function to open modal
+function openSharifulinfoModal() {
+  sharifulinfoModal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+// Function to close modal
+function closeSharifulinfoModal() {
+  sharifulinfoModal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking on X
+document.querySelector('.sharifulinfo-close').addEventListener('click', closeSharifulinfoModal);
+
+// Close modal when clicking outside of it
+window.addEventListener('click', function(event) {
+  if (event.target === sharifulinfoModal) {
+    closeSharifulinfoModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeSharifulinfoModal();
+  }
+});
+
+// Update your footer link to use this function
+document.addEventListener('DOMContentLoaded', function() {
+  const designerLink = document.querySelector('.designer-link');
+  if (designerLink) {
+    designerLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      openSharifulinfoModal();
+    });
+  }
+});
+</script>
+
+
+<script>
+  // আরও স্মার্ট জেনারেশন ফাংশন
+function generateSmartQuote() {
+    const name = document.getElementById('aiName').value || 'প্রিয়';
+    const relation = document.getElementById('aiRelation').value;
+    const mood = document.getElementById('moodSelector').value;
+    
+    // বিশেষ উপলক্ষ্য ডিটেকশন যোগ করুন
+    const occasion = detectOccasion();
+    
+    // সম্পর্কের উপর ভিত্তি করে ডাটাবেস সিলেক্ট
+    let category = getCategoryByRelation(relation);
+    
+    // মুড অনুযায়ী মেসেজ সিলেক্ট
+    let messages = quoteDatabase[category] && quoteDatabase[category][mood];
+    
+    // যদি সেই মুডে মেসেজ না থাকে, তাহলে ডিফল্ট নাও
+    if (!messages || messages.length === 0) {
+        messages = quoteDatabase[category] && quoteDatabase[category]['normal'];
+    }
+    
+    // যদি সেই ক্যাটাগরিই না থাকে, তাহলে ডিফল্ট ক্যাটাগরি
+    if (!messages || messages.length === 0) {
+        category = 'default';
+        messages = quoteDatabase[category][mood] || quoteDatabase[category]['normal'];
+    }
+    
+    // র‍্যান্ডম মেসেজ সিলেক্ট
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    let message = messages[randomIndex];
+    
+    // নাম প্রতিস্থাপন
+    message = message.replace(/{name}/g, name);
+    
+    // বিশেষ সম্পর্কের জন্য বিশেষ সম্বোধন
+    message = addSpecialSalutation(message, relation, name);
+    
+    // বিশেষ উপলক্ষ্য অনুযায়ী যোগ করুন
+    if (occasion !== 'general') {
+        message = addOccasionGreeting(message, occasion);
+    }
+    
+    // এমোজি যোগ করুন মুড অনুযায়ী
+    message = addEmoji(message, mood);
+    
+    // মেসেজ শো করুন
+    document.getElementById('wishcardMessage').value = message;
+    wishcardUpdateCard();
+    saveState();
+}
+
+// সম্পর্ক থেকে ক্যাটাগরি নির্ধারণ
+function getCategoryByRelation(relation) {
+    const relationMap = {
+        'friend': 'birthday',
+        'love': 'love',
+        'family': 'birthday',
+        'brother': 'brother',
+        'sister': 'sister',
+        'boss': 'boss',
+        'teacher': 'teacher',
+        'colleague': 'friend',
+        'child': 'child'
+    };
+    
+    return relationMap[relation] || 'default';
+}
+
+// বিশেষ সম্বোধন যোগ করা
+function addSpecialSalutation(message, relation, name) {
+    const salutations = {
+        'boss': `সম্মানীয় ${name},`,
+        'teacher': `গুরুজ্ঞ ${name},`,
+        'love': `প্রিয়তম ${name},`,
+        'brother': `প্রিয় ভাই ${name},`,
+        'sister': `প্রিয় বোন ${name},`,
+        'friend': `প্রিয় বন্ধু ${name},`,
+        'family': `প্রিয় ${name},`
+    };
+    
+    if (salutations[relation]) {
+        return salutations[relation] + "\n\n" + message;
+    }
+    
+    return message;
+}
+
+// উপলক্ষ্য ডিটেক্ট করা (সিম্পল ভার্সন)
+function detectOccasion() {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    
+    // বাংলা উৎসবের তারিখ (সিম্পল ভার্সন)
+    if (month === 1 && day === 1) return 'new_year';
+    if (month === 10 && day >= 1 && day <= 5) return 'festival'; // দূর্গা পূজা (আনুমানিক)
+    if (month === 6 && day >= 14 && day <= 16) return 'festival'; // ঈদ (আনুমানিক)
+    
+    return 'general';
+}
+
+// উপলক্ষ্য অনুযায়ী গ্রিটিং যোগ
+function addOccasionGreeting(message, occasion) {
+    const occasionGreetings = {
+        'new_year': "\n\nনতুন বছরের শুভকামনা!",
+        'festival': "\n\nউৎসবের শুভেচ্ছা!"
+    };
+    
+    return message + (occasionGreetings[occasion] || "");
+}
+
+// মুড অনুযায়ী এমোজি যোগ
+function addEmoji(message, mood) {
+    const emojiMap = {
+        'emotional': ' 😢❤️',
+        'funny': ' 😂🤣',
+        'poetic': ' ✨🌸',
+        'inspirational': ' 💪🌟',
+        'sarcastic': ' 😏🙄',
+        'romantic': ' 💖🥰',
+        'normal': ' 🙂👍'
+    };
+    
+    return message + (emojiMap[mood] || " 🙂");
+}
+
+// আরও সিলেক্টর অপশন যোগ করতে HTML আপডেট করুন
+function addMoreMoodOptions() {
+    // আরও মুড অপশন যোগ করুন
+    const moodSelector = document.getElementById('moodSelector');
+    const additionalMoods = [
+        {value: 'romantic', text: 'রোমান্টিক'},
+        {value: 'respectful', text: 'সম্মানজনক'},
+        {value: 'blessing', text: 'আশীর্বাদমূলক'}
+    ];
+    
+    additionalMoods.forEach(mood => {
+        const option = document.createElement('option');
+        option.value = mood.value;
+        option.textContent = mood.text;
+        moodSelector.appendChild(option);
+    });
+}
+
+// আরও সম্পর্কের অপশন
+function addMoreRelationOptions() {
+    const relationSelector = document.getElementById('aiRelation');
+    const additionalRelations = [
+        {value: 'child', text: 'শিশু'},
+        {value: 'grandparent', text: 'দাদা/দাদী/নানা/নানী'},
+        {value: 'mentor', text: 'মেন্টর'}
+    ];
+    
+    additionalRelations.forEach(relation => {
+        const option = document.createElement('option');
+        option.value = relation.value;
+        option.textContent = relation.text;
+        relationSelector.appendChild(option);
+    });
+}
+</script>
+
+</body>
+</html>
